@@ -8,8 +8,8 @@ export default class LoginBox extends React.Component {
     return (
       <Grid.Column>
 
-      <Segment size='massive'>
-        <Image src={ require('../../assets/ufcg-logo.png')} size='small' centered/>
+      <Segment size='massive' style={{marginTop:'30%'}}>
+        <Image src={ require('../../assets/ufcg-logo.png')} size='small' centered />
         <Divider/>
         <div style={{textAlign:'center'}}>
           SISTEMA DE PRÉ-MATRÍCULA

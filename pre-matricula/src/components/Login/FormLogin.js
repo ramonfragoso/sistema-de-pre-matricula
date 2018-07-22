@@ -1,35 +1,32 @@
 import React from 'react';
 import {Form, Dropdown} from 'semantic-ui-react';
+import {GoogleLogin, GoogleLogout} from 'react-google-login';
 
-let
+
 
 export default class FormLogin extends React.Component {
-  state = {
-    opcoesDropdown: {
-      {text:'Aluno', value: 'Aluno'},
-      {text: 'Professor',value: 'Professor'}
-    }
-  }
 
 
   render() {
-    const {opcoesDropdown} = this.state;
+
+    const responseGoogle = (response) => {
+      console.log(response);
+    }
+
     return (
       <Form>
         <p/>
         <Form.Field>
-          <Dropdown placeholder="Aluno ou Coordenador?" fluid selection options={opcoesDropdown}/>
+          <Dropdown placeholder="Aluno ou Coordenador?" fluid selection options={[{text:'Aluno', key:'a'}, {text:'Coordenador', key:'c'}]}/>
         </Form.Field>
 
-        <Form.Field>
-          <label>E-mail institucional</label>
-          <input placeholder='seu.email@ccc.ufcg.edu.br' />
-        </Form.Field>
-
-        <Form.Field>
-          <label>Senha</label>
-          <input placeholder='senha' />
-        </Form.Field>
+        <GoogleLogin
+          clientId="707694176740-0gjiop7raf5h6n48ujtb0ldpp23tf0dr.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={responseGoogle}
+          onFailure={responseGoogle}
+          className="fluid ui button primary"
+        />
 
       </Form>
     )
