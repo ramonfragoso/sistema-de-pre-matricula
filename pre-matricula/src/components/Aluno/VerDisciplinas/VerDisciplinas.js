@@ -1,5 +1,5 @@
 import React from 'react';
-import FixedNavbar from '../FixedNavbar';
+import FixedNavbar from '../../FixedNavbar';
 import BarraDisciplinas from './BarraDisciplinas';
 import ListaDisciplinas from './ListaDisciplinas';
 import {Container, Header, Divider, Dropdown, Grid} from 'semantic-ui-react';

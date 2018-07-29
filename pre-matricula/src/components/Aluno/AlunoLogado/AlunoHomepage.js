@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Router} from 'react-router';
 import {Divider, Header, Container, Grid} from 'semantic-ui-react';
-import FixedNavbar from '../FixedNavbar';
+import FixedNavbar from '../../FixedNavbar';
 import RealizarPreMatriculaBox from './RealizarPreMatriculaBox';
 import VerDisciplinasBox from './VerDisciplinasBox';
 import VerDisciplinas from '../VerDisciplinas/VerDisciplinas';

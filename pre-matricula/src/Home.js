@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from './components/Login/Login.js';
 import AlunoHomepage from './components/Aluno/AlunoLogado/AlunoHomepage';
-import CoordenadorHomepage from './components/Aluno/CoordenadorLogado/CoordenadorHomepage';
+import CoordenadorHomepage from './components/Coordenador/CoordenadorLogado/CoordenadorHomepage';
 
 class Home extends Component {
   constructor(props) {

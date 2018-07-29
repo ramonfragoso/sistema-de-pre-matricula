@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Disciplinas from './Disciplinas';
-import FixedNavbar from '../FixedNavbar';
+import FixedNavbar from '../../FixedNavbar';
 import Footer from './Footer';
 
 import '../Aluno.css';

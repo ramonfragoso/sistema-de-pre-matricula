@@ -11,7 +11,7 @@ export default class ItemDisciplina extends React.Component {
     return(
       <div>
       <Grid columns="equal" divided>
-        <Grid.Row className="disciplina" color="grey">
+        <Grid.Row className="disciplina" color="blue">
           <Grid.Column width={2} textAlign="center">
           {this.props.info[0]}
           </Grid.Column>
