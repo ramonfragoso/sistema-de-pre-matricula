@@ -13,7 +13,7 @@ export default class VerDisciplinasBox extends React.Component {
   render() {
     return(
       <div className="topopre">
-        <FixedNavbar handleClick={this.props.handleClick}/>
+        <FixedNavbar handleClick={this.props.handleClick} handleLogout={this.props.handleLogout}/>
         <Disciplinas/>
         <Footer/>
       </div>

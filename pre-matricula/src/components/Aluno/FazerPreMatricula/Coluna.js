@@ -7,7 +7,7 @@ export default class Periodos extends React.Component {
     return(
       <Grid.Column className="periodo">
       <div className="boxDisciplina" style={{backgroundColor: "#002a6d"}}>
-        <div className="content"> <h4> {this.props.index < 9 ? this.props.index + 1 + "°  Periodo" : "Optativas"}  </h4>
+        <div className="content"> <h4> {this.props.cIndex < 9 ? this.props.cIndex + 1 + "°  Periodo" : "Optativas"}  </h4>
         </div>
       </div>
         {this.props.disc.map((a,b) => <DisciplinaBox name={a[0]} lIndex={b} cIndex={this.props.cIndex} handleSelect={this.props.handleSelect}/>)}

@@ -2,13 +2,14 @@ import React from 'react';
 import {Route, Router} from 'react-router';
 import {Divider, Header, Container, Grid} from 'semantic-ui-react';
 import FixedNavbar from '../FixedNavbar';
-import RealizarPreMatriculaBox from './RealizarPreMatriculaBox';
+import VerInformacoes from './VerInformacoesBox';
+import VerInformacoesBox from './VerInformacoesBox';
 import VerDisciplinasBox from './VerDisciplinasBox';
 import VerDisciplinas from '../VerDisciplinas/VerDisciplinas';
 import FazerPreMatricula from '../FazerPreMatricula/FazerPreMatricula';
 import '../Aluno.css';
 
-export default class AlunoHomepage extends React.Component {
+export default class CoordenadorHomepage extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,12 +31,12 @@ export default class AlunoHomepage extends React.Component {
           <Grid>
             <Grid.Row className="logadoText">
               <Header>
-                Seja bem vindo Ramon, aqui você pode escolher entre fazer sua matrícula ou ver as disciplinas disponíveis. No topo da página pode ver se há notificações ou sair da página.
+                Seja bem vindo Coordenador, aqui você pode escolher entre fazer sua matrícula ou ver as disciplinas disponíveis. No topo da página pode ver se há notificações ou sair da página.
               </Header>
             </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column align="center">
-                <RealizarPreMatriculaBox handleClick={this.handleClick}/>
+                <VerInformacoesBox handleClick={this.handleClick}/>
               </Grid.Column>
               <Grid.Column align="center">
                 <VerDisciplinasBox handleClick={this.handleClick}/>

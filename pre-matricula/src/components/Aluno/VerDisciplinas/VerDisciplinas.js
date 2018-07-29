@@ -25,7 +25,7 @@ export default class VerDisciplinasBox extends React.Component {
   render() {
     return(
       <div className="topo">
-        <FixedNavbar handleClick={this.props.handleClick}/>
+        <FixedNavbar handleClick={this.props.handleClick} handleLogout={this.props.handleLogout}/>
         <Container>
           <Header><h1>Disciplinas</h1></Header>
           <Divider/>

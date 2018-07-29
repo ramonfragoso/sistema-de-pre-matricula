@@ -8,7 +8,7 @@ export default class RealizarPreMatriculaBox extends React.Component {
     return(
       <Card onClick={(e) => this.props.handleClick("matricula", e)}>
         <i className="far fa-edit icone"></i>
-        <Card.Content>
+        <Card.Content extra>
           <Card.Header>REALIZAR PRÉ-MATRÍCULA</Card.Header>
         </Card.Content>
       </Card>
