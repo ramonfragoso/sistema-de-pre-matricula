@@ -1,0 +1,69 @@
+.topo {
+    padding-top: 100px;
+}
+
+.topopre {
+    padding-top: 50px;
+}
+
+.logadoText {
+  margin-bottom: 80px;
+}
+
+.icone {
+  font-size: 15em;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: #ff7700;
+}
+
+.dropdownDisciplinas {
+  margin-bottom: 50px;
+}
+
+.barra {
+  padding-bottom: 50px;
+}
+.listSelector{
+  border-radius: 5px;
+}
+.disciplina {
+  margin-bottom: 17px;
+}
+
+.boxDisciplina {
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 10%;
+  position: relative;
+  width: 90%;
+  height: 60px;
+}
+
+.content {
+  font-size: 80%;
+  margin-top: 10%;
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.boxDisciplina:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+#footerMatricula{
+  border-radius: 0px 0px 0px 0px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6%;
+  color: white;
+  text-align: left;
+}

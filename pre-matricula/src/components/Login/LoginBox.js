@@ -14,7 +14,7 @@ export default class LoginBox extends React.Component {
         <div style={{textAlign:'center'}}>
           SISTEMA DE PRÉ-MATRÍCULA
         </div>
-        <FormLogin/>
+        <FormLogin handleChange={this.props.handleChange}/>
       </Segment>
 
       </Grid.Column>

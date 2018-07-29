@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from './components/Login/Login';
-import AlunoHomepage from './components/Aluno/AlunoHomepage';
+import AlunoHomepage from './components/Aluno/AlunoLogado/AlunoHomepage';
+import Home from './Home'
 
 
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+  super(props);
+  this.handleLoginChange = this.handleLoginChange.bind(this);
+  this.state = {loginStatus: "loggedOff"};
+}
+  handleLoginChange(newLoginStatus){
+
+    this.setState({loginStatus: newLoginStatus})
+    console.log(this.state);
+
+  }
+
+
   render() {
     return (
-      <div className="background">
-        <Route path="/" exact component={Login} />
-        <Route path="/login_aluno" exact component={AlunoHomepage} />
-
+      <div>
+        <Route path="/" exact render={() => <Home handleFromParent={this.handleLoginChange} loginState={this.state.loginStatus}/>}/>
       </div>
     );
   }
