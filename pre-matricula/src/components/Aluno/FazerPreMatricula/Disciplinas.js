@@ -11,7 +11,7 @@ export default class Disciplinas extends React.Component {
   render() {
     return(
       <div>
-          <Periodos/>
+          <Periodos updateCreditos={this.props.updateCreditos}/>
       </div>
     )
   }

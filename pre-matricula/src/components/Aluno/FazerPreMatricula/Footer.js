@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
   render() {
     return(
         <Menu borderless className="footer inverted" id="footerMatricula">
-          <Menu.Item>TOTAL DE CRÉDITOS: N_CRED</Menu.Item>
+          <Menu.Item>TOTAL DE CRÉDITOS: {this.props.numCreditos}</Menu.Item>
           <Menu.Menu className="right">
           <Menu.Item ><Button>FAZER PRÉ-MATRÍCULA</Button></Menu.Item>
           <Menu.Item ><Button primary>CANCELAR</Button></Menu.Item>
