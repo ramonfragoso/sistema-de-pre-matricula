@@ -1,14 +1,13 @@
 import React from 'react';
 import FixedNavbar from '../../FixedNavbar';
-import BarraDisciplinas from './BarraDisciplinas';
-import ListaDisciplinas from './ListaDisciplinas';
+import ListaDisciplinasEditar from './ListaDisciplinasEditar';
 import {Container, Header, Divider, Dropdown, Grid} from 'semantic-ui-react';
 
 
-import '../Aluno.css';
+import '../../Aluno/Aluno.css';
 
 
-export default class VerDisciplinas extends React.Component {
+export default class EditarDisciplina extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +60,7 @@ export default class VerDisciplinas extends React.Component {
             </Grid.Column>
           </Grid>
           <br/>
-          <ListaDisciplinas periodo={this.state.periodo} filtro={this.state.filtro}/>
+          <ListaDisciplinasEditar periodo={this.state.periodo} filtro={this.state.filtro}/>
         </Container>
       </div>
     )

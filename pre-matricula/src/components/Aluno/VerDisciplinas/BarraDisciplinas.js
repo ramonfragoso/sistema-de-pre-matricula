@@ -16,6 +16,8 @@ export default class BarraDisciplinas extends React.Component {
         <Menu.Menu position='right'>
           <Menu.Item>CRÉDITOS</Menu.Item>
           <Menu.Item>VAGAS</Menu.Item>
+          <Menu.Item>Editar</Menu.Item>
+          <Menu.Item>Deletar</Menu.Item>
         </Menu.Menu>
       </Menu>
     )

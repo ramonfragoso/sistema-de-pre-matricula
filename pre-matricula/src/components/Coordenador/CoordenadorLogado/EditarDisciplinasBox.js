@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card} from 'semantic-ui-react';
 import '../../Aluno/Aluno.css';
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect } from 'react-router-dom'
 
 export default class EditarDisciplinasBox extends React.Component {
   state = {
@@ -16,7 +16,7 @@ export default class EditarDisciplinasBox extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/cadastro'/>
+      return <Redirect to='/editar'/>
     }
   }
   render() {

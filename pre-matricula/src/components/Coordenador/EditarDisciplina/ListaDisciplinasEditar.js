@@ -1,8 +1,8 @@
 import React from 'react';
-import ItemDisciplina from './ItemDisciplina';
+import ItemDisciplinaEditar from './ItemDisciplinaEditar';
 import {Table} from 'semantic-ui-react';
 
-import '../Aluno.css';
+import '../../Aluno/Aluno.css';
 const DESORDENADO = 2;
 
 export default class ListaDisciplinas extends React.Component {
@@ -22,7 +22,7 @@ export default class ListaDisciplinas extends React.Component {
                           return 0;
                   })
     .filter((a) => a[4] == this.props.periodo || this.props.periodo == 11)
-    .map((a) => <ItemDisciplina info={a}/>)
+    .map((a) => <ItemDisciplinaEditar info={a}/>)
   }
 
 
@@ -33,17 +33,19 @@ export default class ListaDisciplinas extends React.Component {
       <Table striped>
         <Table.Header>
           <Table.Row>
-          <Table.HeaderCell>CODIGO</Table.HeaderCell>
-          <Table.HeaderCell>NOME</Table.HeaderCell>
-          <Table.HeaderCell>CRÉDITOS</Table.HeaderCell>
-          <Table.HeaderCell>VAGAS</Table.HeaderCell>
+            <Table.HeaderCell>CODIGO</Table.HeaderCell>
+            <Table.HeaderCell>NOME</Table.HeaderCell>
+            <Table.HeaderCell>CRÉDITOS</Table.HeaderCell>
+            <Table.HeaderCell>VAGAS</Table.HeaderCell>
+            <Table.HeaderCell>EDITAR</Table.HeaderCell>
+            <Table.HeaderCell>DELETAR</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
       {this.props.filtro == DESORDENADO ?
         this.state.disciplinas
           .filter((a) => a[4] == this.props.periodo || this.props.periodo == 11)
-          .map((a) => <ItemDisciplina info={a}/>)
+          .map((a) => <ItemDisciplinaEditar info={a} link={a[0]}/>)
     : this.getOrdenadoNome()}
           </Table.Body>
         </Table>

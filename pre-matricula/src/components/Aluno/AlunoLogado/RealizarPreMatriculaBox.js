@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card} from 'semantic-ui-react';
 import '../Aluno.css';
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect } from 'react-router-dom';
 
 export default class RealizarPreMatriculaBox extends React.Component {
   state = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Item} from 'semantic-ui-react';
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect } from 'react-router-dom'
 export default class FixedNavbar extends React.Component {
   state = {
     redirect: false

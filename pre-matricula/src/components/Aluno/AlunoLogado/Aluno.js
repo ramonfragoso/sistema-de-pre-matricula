@@ -2,7 +2,7 @@ import React from 'react';
 import {Divider, Header, Container, Grid} from 'semantic-ui-react';
 import FixedNavbar from '../../FixedNavbar';
 import RealizarPreMatriculaBox from './RealizarPreMatriculaBox';
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect } from 'react-router-dom'
 import VerDisciplinasBox from './VerDisciplinasBox';
 
 export default class Aluno extends React.Component {

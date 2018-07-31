@@ -2,7 +2,7 @@
 import React from 'react';
 import {Form, Dropdown} from 'semantic-ui-react';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
-import {Route, Link} from 'react-router';
+import {Route, Link} from 'react-router-dom';
 import AlunoHomepage from '../Aluno/AlunoLogado/AlunoHomepage';
 
 export default class FormLogin extends React.Component {

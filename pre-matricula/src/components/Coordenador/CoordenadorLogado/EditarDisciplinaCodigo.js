@@ -2,20 +2,25 @@ import React from 'react';
 import {Route, Router} from 'react-router-dom';
 import {Divider, Header, Container} from 'semantic-ui-react';
 import FixedNavbar from '../../FixedNavbar';
-import FormDisciplina from './FormDisciplina';
+import { Link } from 'react-router-dom';
+import FormDisciplinaEditar from './FormDisciplinaEditar';
 
 import '../../Aluno/Aluno.css';
 
-export default class CadastrarDisciplina extends React.Component {
 
+
+export default class EditarDisciplinaCodigo extends React.Component {
+  constructor (props) {
+    super(props)
+  }
   render() {
     return(
       <div className="topo">
         <FixedNavbar/>
         <Container>
-          <Header><h1>Cadastrar Disciplina</h1></Header>
+          <Header><h1>Editar Disciplina</h1></Header>
           <Divider/>
-          <FormDisciplina/>
+          <FormDisciplinaEditar codigo={this.props.props.match.params.num}/>
         </Container>
       </div>
     )
