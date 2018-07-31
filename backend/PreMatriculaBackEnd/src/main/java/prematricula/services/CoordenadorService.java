@@ -1,5 +1,7 @@
 package prematricula.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,12 @@ public class CoordenadorService {
 	@Autowired
 	CoordenadorRepository coordenadorRepository;
 	
-	public boolean isCoordenador(String email){
-		return coordenadorRepository.findOne(email) != null;
+	public List<Coordenador> findAll(){
+		return this.coordenadorRepository.findAll();
+	}
+	
+	public Coordenador getCoordenador(String email){
+		return coordenadorRepository.findOne(email);
 	}
 	
 	public void saveCoordenador(Coordenador coordenador){

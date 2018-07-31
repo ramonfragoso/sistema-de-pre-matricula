@@ -44,16 +44,4 @@ public class AlunoService {
 		return this.findAluno(alunoEmail) == null;
 	}
 	
-	
-	public List<Aluno> findAllAlunosInDisciplina(String codigoDisciplina){
-		List<Aluno> alunos = this.findAll();
-		List<Aluno> alunosInDisciplina = new ArrayList<Aluno>();
-		for(Aluno aluno:alunos){
-			if(aluno.hasDisciplina(codigoDisciplina)){
-				alunosInDisciplina.add(aluno);
-			}
-		}
-		return alunosInDisciplina;
-	}
-	
 }
