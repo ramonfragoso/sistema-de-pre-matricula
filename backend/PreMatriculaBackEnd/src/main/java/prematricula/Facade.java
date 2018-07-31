@@ -25,7 +25,7 @@ import prematricula.services.DisciplinaService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "+")
+@CrossOrigin(origins = "*")
 public class Facade {
 
 	@Autowired
@@ -88,7 +88,7 @@ public class Facade {
 		 */
 		Disciplina disciplina = new Disciplina();
 		disciplina.setCodigo(json.get("codigo"));
-		disciplina.setCodigo(json.get("nome"));
+		disciplina.setNome(json.get("nome"));
 		disciplina.setPeriodo(Integer.parseInt(json.get("periodo")));
 		disciplina.setQtdCreditos(Integer.parseInt(json.get("qtdCreditos")));
 		disciplina.setGrade(json.get("tipoGrade"));
