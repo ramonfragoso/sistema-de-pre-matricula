@@ -35,6 +35,11 @@ public class AlunoService {
 	}
 	
 	
+	
+	public void deleteAluno(String email) {
+		this.alunoRepository.delete(email);
+	}
+	
 	public boolean isFirstAccess(String alunoEmail) {
 		return this.findAluno(alunoEmail) == null;
 	}
