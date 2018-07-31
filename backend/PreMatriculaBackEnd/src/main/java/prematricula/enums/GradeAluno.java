@@ -1,8 +1,9 @@
 package prematricula.enums;
-public enum Grade{
-	NOVA("grade nova"),ANTIGA("grade antiga"),AMBAS("ambas as grades");
+
+public enum GradeAluno {
+	NOVA("grade nova"),ANTIGA("grade antiga");
 	private String tipoGrade;
-	Grade(String tipoGrade){
+	GradeAluno(String tipoGrade){
 		this.tipoGrade = tipoGrade;
 	}
 	

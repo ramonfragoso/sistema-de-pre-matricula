@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import prematricula.enums.Grade;
+import prematricula.enums.GradeDisciplina;
 import prematricula.enums.TipoDisciplina;
 
 
@@ -30,7 +30,7 @@ public class Disciplina {
 	private int periodo;
 	private int qtdCreditos;
 	@Enumerated(EnumType.STRING)
-	private Grade tipoGrade;
+	private GradeDisciplina tipoGrade;
 	@Enumerated(EnumType.STRING)
 	private TipoDisciplina tipoDisciplina;
 	@ManyToMany(mappedBy = "disciplinas")
@@ -51,11 +51,11 @@ public class Disciplina {
 
 	public void setGrade(String tipoGrade) {
 		if (tipoGrade.toLowerCase().equals("nova")) {
-			this.tipoGrade = Grade.NOVA;
+			this.tipoGrade = GradeDisciplina.NOVA;
 		} else if (tipoGrade.toLowerCase().equals("ambas")) {
-			this.tipoGrade = Grade.AMBAS;
+			this.tipoGrade = GradeDisciplina.AMBAS;
 		} else {
-			this.tipoGrade = Grade.ANTIGA;
+			this.tipoGrade = GradeDisciplina.ANTIGA;
 		}
 	}
 
@@ -107,7 +107,7 @@ public class Disciplina {
 		this.tipoDisciplina = tipoDisciplina;
 	}
 
-	public Grade getTipoGrade() {
+	public GradeDisciplina getTipoGrade() {
 		return tipoGrade;
 	}
 	

@@ -21,11 +21,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import prematricula.enums.Grade;
+import prematricula.enums.GradeAluno;
+import prematricula.enums.GradeDisciplina;
 
 @Entity
 @Table(name = "Aluno")
-@NoArgsConstructor
 @EqualsAndHashCode
 public class Aluno {
 
@@ -42,7 +42,11 @@ public class Aluno {
 	)
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
-	private Grade grade;
+	private GradeAluno grade;
+	
+	public Aluno() {
+		
+	}
 
 	public Aluno(String email, String nome, String matricula, String grade) {
 		this.email = email;
@@ -59,9 +63,9 @@ public class Aluno {
 
 	public void setGrade(String grade) {
 		if (grade.toLowerCase() == "nova") {
-			this.grade = Grade.NOVA;
+			this.grade = GradeAluno.NOVA;
 		} else {
-			this.grade = Grade.ANTIGA;
+			this.grade = GradeAluno.ANTIGA;
 		}
 	}
 	
@@ -104,7 +108,7 @@ public class Aluno {
 		this.disciplinas = disciplinas;
 	}
 
-	public Grade getGrade() {
+	public GradeAluno getGrade() {
 		return grade;
 	}
 

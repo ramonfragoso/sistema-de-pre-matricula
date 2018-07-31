@@ -11,18 +11,44 @@ import prematricula.entity.Disciplina;
 import prematricula.repository.AlunoRepository;
 
 @Service
-public interface AlunoService {
+public class AlunoService {
 	
-	public List<Aluno> findAll();
+	@Autowired
+	AlunoRepository alunoRepository;
 	
-	public void saveAluno(Aluno aluno);
+	public List<Aluno> findAll(){
+		return this.alunoRepository.findAll();
+	}
 	
-	public List<Disciplina> findAllDisciplinasAluno(String alunoEmail);
+	public void saveAluno(Aluno aluno) {
+		alunoRepository.save(aluno);
+	}
 	
-	public Aluno findAluno(String alunoEmail);
 	
-	public boolean isFirstAccess(String alunoEmail);
+	public List<Disciplina> findAllDisciplinasAluno(String alunoEmail){
+		return this.findAluno(alunoEmail).getDisciplinas();
+	}
 	
-	public List<Aluno> findAllAlunosInDisciplina(String codigoDisciplina);
+	
+	public Aluno findAluno(String alunoEmail) {
+		return alunoRepository.findOne(alunoEmail);
+	}
+	
+	
+	public boolean isFirstAccess(String alunoEmail) {
+		return this.findAluno(alunoEmail) == null;
+	}
+	
+	
+	public List<Aluno> findAllAlunosInDisciplina(String codigoDisciplina){
+		List<Aluno> alunos = this.findAll();
+		List<Aluno> alunosInDisciplina = new ArrayList<Aluno>();
+		for(Aluno aluno:alunos){
+			if(aluno.hasDisciplina(codigoDisciplina)){
+				alunosInDisciplina.add(aluno);
+			}
+		}
+		return alunosInDisciplina;
+	}
 	
 }

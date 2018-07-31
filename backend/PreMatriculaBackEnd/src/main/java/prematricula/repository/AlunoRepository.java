@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import prematricula.entity.Aluno;
 
+@Repository
 public interface AlunoRepository extends JpaRepository<Aluno, String>{
 
 }

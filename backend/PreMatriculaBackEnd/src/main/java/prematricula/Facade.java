@@ -3,11 +3,10 @@ package prematricula;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import prematricula.entity.Aluno;
 import prematricula.entity.Disciplina;
-import prematricula.repository.DisciplinaRepository;
 import prematricula.services.AlunoService;
+import prematricula.services.CoordenadorService;
 import prematricula.services.DisciplinaService;
 
 @RestController
@@ -27,29 +26,34 @@ public class Facade {
 
 	@Autowired
 	private AlunoService alunoService;
-//
+	
 	@Autowired
 	private DisciplinaService disciplinaService;
-//	
-//	@Autowired
-//	private CoordenadorRepository coordenadorRepository;
+	
+	@Autowired
+	private CoordenadorService coordenadorService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/alunos")
+	@GetMapping(value = "/alunos")
 	public List<Aluno> alunos() {
-		return new ArrayList<Aluno>();
+		return alunoService.findAll();
 	}
 
 	@PostMapping(value = "/alunos")
 	public void addAluno(@RequestBody Aluno aluno) {
 		alunoService.saveAluno(aluno);
 	}
+	
+	@GetMapping(value="/alunoslouco")
+	public Aluno getAluno() {
+		return new Aluno("ccc", "aaa", "aaa", "nova");
+	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/disciplinas")
+	@GetMapping(value = "/disciplinas")
 	public List<Disciplina> disciplinas() {
 		return disciplinaService.findAll();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/disciplinaslouca")
+	@GetMapping(value = "/disciplinaslouca")
 	public Disciplina getDisc() {
 		return new Disciplina("1", "f", 6, 2, "grade antiga", "obrigatoria");
 	}
@@ -59,7 +63,7 @@ public class Facade {
 		disciplinaService.saveDisciplina(disciplina);
 	}
 
-	@RequestMapping("/hello")
+	@GetMapping("/hello")
 	public String hello() {
 		return "hello";
 	}
