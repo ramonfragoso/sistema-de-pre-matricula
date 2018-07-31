@@ -5,6 +5,7 @@ import CadastrarDisciplina from '../CadastrarDisciplina/CadastrarDisciplina';
 import EditarDisciplina from '../EditarDisciplina/EditarDisciplina';
 import EditarDisciplinaCodigo from './EditarDisciplinaCodigo';
 import Coordenador from './Coordenador'
+import VerPreMatriculas from '../VerPreMatriculas/VerPreMatriculas';
 import '../../Aluno/Aluno.css';
 
 export default class CoordenadorHomepage extends React.Component {
@@ -20,6 +21,7 @@ export default class CoordenadorHomepage extends React.Component {
       <Route path="/cadastro" exact render={() => <CadastrarDisciplina handleLogout={this.props.handleLogout}/>}/>
       <Route path="/editar" exact render={() => <EditarDisciplina handleLogout={this.props.handleLogout}/>}/>
       <Route path="/editar/:num" exact render={(match) => <EditarDisciplinaCodigo props={match} handleLogout={this.props.handleLogout}/>}/>
+      <Route path="/prematriculas" exact render={() => <VerPreMatriculas handleLogout={this.props.handleLogout}/>}/>
       </div>
       )
   }

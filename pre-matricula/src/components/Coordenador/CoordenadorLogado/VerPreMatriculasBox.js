@@ -16,7 +16,7 @@ export default class VerPreMatriculasBox extends React.Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/cadastro'/>
+      return <Redirect to='/prematriculas'/>
     }
   }
   render() {
