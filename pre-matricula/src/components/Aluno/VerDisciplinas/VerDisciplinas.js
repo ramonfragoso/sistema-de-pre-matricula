@@ -27,10 +27,11 @@ export default class VerDisciplinasBox extends React.Component {
   handleChangeFiltro(e){
     this.setState({filtro: e.target.value})
   }
+
   render() {
     return(
       <div className="topo">
-        <FixedNavbar handleClick={this.props.handleClick} handleLogout={this.props.handleLogout}/>
+        <FixedNavbar handleLogout={this.props.handleLogout}/>
         <Container>
           <Header><h1>Disciplinas</h1></Header>
           <Divider/>

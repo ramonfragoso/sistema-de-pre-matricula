@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path="/" exact render={() => <Home handleFromParent={this.handleLoginChange} handleLogout={this.handleLoginChangeOnclick} loginState={this.state.loginStatus}/>}/>
+        <Route path="/"  render={() => <Home handleFromParent={this.handleLoginChange} handleLogout={this.handleLoginChangeOnclick} loginState={this.state.loginStatus}/>}/>
       </div>
     );
   }

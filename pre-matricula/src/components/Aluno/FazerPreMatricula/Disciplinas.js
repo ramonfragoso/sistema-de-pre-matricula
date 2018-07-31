@@ -11,7 +11,7 @@ export default class Disciplinas extends React.Component {
   render() {
     return(
       <div>
-          <Periodos updateCreditos={this.props.updateCreditos}/>
+          <Periodos handleSelect={this.props.handleSelect} disciplinas={this.props.disciplinas}/>
       </div>
     )
   }

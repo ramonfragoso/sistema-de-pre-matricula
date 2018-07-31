@@ -10,7 +10,7 @@ export default class Periodos extends React.Component {
         <div className="content"> <h4> {this.props.cIndex < 9 ? this.props.cIndex + 1 + "°  Periodo" : "Optativas"}  </h4>
         </div>
       </div>
-        {this.props.disc.map((a,b) => <DisciplinaBox name={a[0]} lIndex={b} cIndex={this.props.cIndex} handleSelect={this.props.handleSelect}/>)}
+        {this.props.disc.map((a,b) => <DisciplinaBox name={a[0]} selected={a[1]} lIndex={b} cIndex={this.props.cIndex} handleSelect={this.props.handleSelect}/>)}
         <Grid.Row>
         </Grid.Row>
       </Grid.Column>
