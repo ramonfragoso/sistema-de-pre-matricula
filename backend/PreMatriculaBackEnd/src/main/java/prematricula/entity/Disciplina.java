@@ -40,13 +40,13 @@ public class Disciplina {
 		
 	}
 
-	public Disciplina(String codigo, String nome, int periodo, int qtdCreditos, String tipoGrade, String tipoDisciplina) {
+	public Disciplina(String codigo, String nome, int periodo, int qtdCreditos, String tipoGrade) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.periodo = periodo;
 		this.qtdCreditos = qtdCreditos;
 		setGrade(tipoGrade);
-		setTipoDisciplina(tipoDisciplina);
+		setTipoDisciplina(periodo);
 	}
 
 	public void setGrade(String tipoGrade) {
@@ -59,8 +59,9 @@ public class Disciplina {
 		}
 	}
 
-	public void setTipoDisciplina(String tipoDisciplina) {
-		if (tipoDisciplina.toLowerCase().equals("optativa")) {
+	public void setTipoDisciplina(int periodo) {
+		int optativa = 0;
+		if (periodo == optativa) {
 			this.tipoDisciplina = TipoDisciplina.OPTATIVA;
 		} else {
 			this.tipoDisciplina = TipoDisciplina.OBRIGATORIA;
