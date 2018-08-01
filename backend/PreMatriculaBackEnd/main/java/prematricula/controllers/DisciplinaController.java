@@ -1,6 +1,5 @@
 package prematricula.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +22,7 @@ import prematricula.services.DisciplinaService;
 
 @RestController
 @RequestMapping("/api/disciplinas")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class DisciplinaController {
 
 	@Autowired
@@ -32,7 +31,7 @@ public class DisciplinaController {
 	@Autowired
 	private CoordenadorService coordenadorService;
 	
-	@GetMapping(value = "")
+	@GetMapping(value = "/")
 	public List<Disciplina> getDisciplinas() {
 		return disciplinaService.findAll();
 	}
@@ -44,12 +43,12 @@ public class DisciplinaController {
 	
 	@GetMapping(value = "/{codigo}/alunos")
 	public Set<Aluno> getAlunosFromDisciplina(@PathVariable String codigo){
-		return this.disciplinaService.getAlunosFromDisciplina(codigo);
+		return disciplinaService.getAlunosFromDisciplina(codigo);
 	}
 	
 	
 
-	@PostMapping(value = "")
+	@PostMapping(value = "/")
 	public void addDisciplina(@RequestBody Map<String, String> json) {
 		
 		/**

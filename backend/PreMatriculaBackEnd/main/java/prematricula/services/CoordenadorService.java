@@ -19,7 +19,7 @@ public class CoordenadorService {
 	}
 	
 	public Coordenador getCoordenador(String email){
-		return coordenadorRepository.findById(email).orElse(null);
+		return coordenadorRepository.findOne(email);
 	}
 	
 	public void saveCoordenador(Coordenador coordenador){
