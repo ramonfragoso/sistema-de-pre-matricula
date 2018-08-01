@@ -12,10 +12,10 @@ export default class ItemPreMatricula extends React.Component {
 
     return(
       <Table.Row>
-        <Table.Cell>{this.props.info[0]}</Table.Cell>
-        <Table.Cell singleLine>{this.props.info[1]}</Table.Cell>
-        <Table.Cell>{this.props.info[2]}</Table.Cell>
-        <Table.Cell>{this.props.info[3]}</Table.Cell>
+        <Table.Cell>{this.props.info.email}</Table.Cell>
+        <Table.Cell singleLine>{this.props.info.nome}</Table.Cell>
+        <Table.Cell>{this.props.info.matricula}</Table.Cell>
+        <Table.Cell>{this.props.info.disciplinas}</Table.Cell>
       </Table.Row>
 
     )

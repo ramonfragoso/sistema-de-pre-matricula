@@ -4,14 +4,27 @@ import { Route, Redirect } from 'react-router-dom'
 import '../../Aluno/Aluno.css';
 
 export default class ItemDisciplina extends React.Component {
-    state = {
-      redirect: false
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+        redirect: false
 
+
+    }
+    this.handleDelete = this.handleDelete.bind(this)
+  }
     setRedirect = () => {
       this.setState({
         redirect: true
       })
+    }
+
+    handleDelete(e){
+      e.preventDefault();
+      fetch(`https://prematricula-ufcg.herokuapp.com/api/disciplinas/${this.props.link}`,{
+        method: "DELETE"
+      }
+    ).catch(error => console.log(error))
     }
 
     renderRedirect = () => {
@@ -31,7 +44,7 @@ export default class ItemDisciplina extends React.Component {
             <Table.Cell>{this.props.info.qtdCreditos}</Table.Cell>
             <Table.Cell>{this.props.info.periodo}</Table.Cell>
             <Table.Cell><i className="fas fa-clipboard-list"  onClick={this.setRedirect}></i></Table.Cell>
-            <Table.Cell><i className="far fa-times-circle"></i></Table.Cell>
+            <Table.Cell><i className="far fa-times-circle" onClick={(e) => {this.handleDelete(e)}}></i></Table.Cell>
           </Table.Row>
 
     )

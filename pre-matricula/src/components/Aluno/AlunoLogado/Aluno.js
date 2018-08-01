@@ -18,7 +18,7 @@ export default class Aluno extends React.Component {
 
 componentDidMount(){
   let email = localStorage.getItem("emailSessao")
-  let emailFinal = "";
+  let emailFinal = ""
   for (let caractere of email){
     if (caractere == "@"){
       break;

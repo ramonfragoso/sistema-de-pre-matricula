@@ -41,7 +41,7 @@ handleChange = (e,value) => {
       "periodo": parseInt(this.state.periodo),
       "qtdCreditos": parseInt(this.state.qtdCreditos),
       "tipoGrade": this.state.tipoGrade,
-      "coordenadorEmail": "hugo.galvao@ccc.ufcg.edu.br"
+      "coordenadorEmail": "emailtestepsoft@gmail.com"
     };
     fetch("https://prematricula-ufcg.herokuapp.com/api/disciplinas",{
       method: "POST",
@@ -69,7 +69,7 @@ handleChange = (e,value) => {
       "periodo": parseInt(this.state.periodo),
       "qtdCreditos": parseInt(this.state.qtdCreditos),
       "tipoGrade": this.state.tipoGrade,
-      "coordenadorEmail": "hugo.galvao@ccc.ufcg.edu.br"
+      "coordenadorEmail": "emailtestepsoft@gmail.com"
     }
     fetch("https://prematricula-ufcg.herokuapp.com/api/disciplinas",{
       method: "POST",
