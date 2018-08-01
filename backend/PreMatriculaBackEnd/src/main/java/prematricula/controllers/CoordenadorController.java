@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import prematricula.entity.Coordenador;
 import prematricula.services.CoordenadorService;
+import prematricula.facade.OrdenarServiceFacade;
 
 @RestController
 @RequestMapping("/api/coordenadores")
@@ -17,12 +18,12 @@ import prematricula.services.CoordenadorService;
 public class CoordenadorController {
 
 	@Autowired
-	private CoordenadorService coordenadorService;
+	private OrdenarServiceFacade ordernarServiceFacade;
 	
 	
 	@GetMapping("")
 	public List<Coordenador> getCoordenadores(){
-		return this.coordenadorService.findAll();
+		return this.ordernarServiceFacade.findAllCoordenadores();
 	}
 	
 }

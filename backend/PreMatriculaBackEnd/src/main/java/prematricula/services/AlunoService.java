@@ -21,7 +21,7 @@ public class AlunoService {
 		return this.alunoRepository.findAll();
 	}
 	
-	public void saveAluno(Aluno aluno) {
+	public void save(Aluno aluno) {
 		alunoRepository.save(aluno);
 	}
 	
@@ -47,17 +47,13 @@ public class AlunoService {
 		this.alunoRepository.delete(aluno);
 	}
 	
-	public boolean isFirstAccess(String slug) {
-		return this.findAluno(slug) == null;
-	}
-
-	public void addDisciplinasToAluno(String slug, Set<Disciplina> disciplinas) {
+	public void updateDisciplinas(String slug, Set<Disciplina> disciplinas) {
 		Aluno aluno = this.findAluno(slug);
 		aluno.setDisciplinas(disciplinas);
 		this.alunoRepository.save(aluno);
 	}
 
-	public Set<Disciplina> getDisciplinasFromAluno(String slug) {
+	public Set<Disciplina> findAllDisciplinasOfAluno(String slug) {
 		return this.findAluno(slug).getDisciplinas();
 	}
 	
