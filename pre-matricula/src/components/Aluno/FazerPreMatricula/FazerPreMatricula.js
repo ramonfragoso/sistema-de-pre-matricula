@@ -132,7 +132,7 @@ export default class VerDisciplinasBox extends React.Component {
       }
       console.log(enviadas)
       console.log(emailFinal)
-      fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/hugo_galvao/disciplinas`,{
+      fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`,{
         method: "POST",
         body: JSON.stringify(corpo),
         headers:{
@@ -153,3 +153,15 @@ export default class VerDisciplinasBox extends React.Component {
     )
   }
 }
+
+
+
+
+
+
+
+
+fetch("https://prematricula-ufcg.herokuapp.com/api/alunos/jose_ramon_silva/disciplinas",{
+method: "POST",
+body: JSON.stringify({"codigos": ["1411312"]})}
+)

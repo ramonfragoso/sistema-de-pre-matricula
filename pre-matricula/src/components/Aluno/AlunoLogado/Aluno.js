@@ -2,7 +2,7 @@ import React from 'react';
 import {Divider, Header, Container, Grid} from 'semantic-ui-react';
 import FixedNavbar from '../../FixedNavbar';
 import RealizarPreMatriculaBox from './RealizarPreMatriculaBox';
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Link } from 'react-router-dom'
 import VerDisciplinasBox from './VerDisciplinasBox';
 
 
@@ -49,6 +49,7 @@ render(){
             <Grid.Row className="logadoText">
               <Header>
                 Seja bem vindo Aluno, aqui você pode escolher entre fazer sua matrícula ou ver as disciplinas disponíveis.
+                <Link to="/editarlogin"> Clique aqui </Link> para editar seu login.
               </Header>
             </Grid.Row>
             <Grid.Row columns={2}>
