@@ -58,11 +58,11 @@ public class Disciplina {
 	}
 
 	public void setGrade(String tipoGrade) {
-		if (tipoGrade.toLowerCase().equals(GradeDisciplina.GRADE_NOVA)) {
+		if (tipoGrade.toUpperCase().equals(GradeDisciplina.GRADE_NOVA)) {
 			this.tipoGrade = GradeDisciplina.NOVA;
-		} else if (tipoGrade.toLowerCase().equals(GradeDisciplina.AMBAS_GRADES)) {
+		} else if (tipoGrade.toUpperCase().equals(GradeDisciplina.AMBAS_GRADES)) {
 			this.tipoGrade = GradeDisciplina.AMBAS;
-		} else if (tipoGrade.toLowerCase().equals(GradeDisciplina.ANTIGA)) {
+		} else if (tipoGrade.toUpperCase().equals(GradeDisciplina.ANTIGA)) {
 			this.tipoGrade = GradeDisciplina.ANTIGA;
 		}
 	}
