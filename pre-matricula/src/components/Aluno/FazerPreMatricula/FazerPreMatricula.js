@@ -129,9 +129,14 @@ export default class VerDisciplinasBox extends React.Component {
       let corpo = {
         codigos: enviadas
       }
-      fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`,{
+      console.log(enviadas)
+      console.log(emailFinal)
+      fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/hugo_galvao/disciplinas`,{
         method: "POST",
-        body: JSON.stringify(corpo)
+        body: JSON.stringify(corpo),
+        headers:{
+          "Content-Type": "application/json"
+        }
       })
 
     }
