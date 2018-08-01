@@ -1,6 +1,5 @@
 package prematricula.controllers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +23,7 @@ import prematricula.util.DisciplinasList;
 
 @RestController
 @RequestMapping("/api/alunos")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AlunoController {
 
 	@Autowired
@@ -33,45 +32,44 @@ public class AlunoController {
 	@Autowired
 	private DisciplinaService disciplinaService;
 	
-	@GetMapping(value = "")
+	@GetMapping(value = "/")
 	public List<Aluno> getAlunos() {
 		return alunoService.findAll();
 	}
 	
-	@GetMapping(value = "/{slug}")
-	public Aluno getAluno(@PathVariable String slug) {
-		return alunoService.findAluno(slug);
+	@GetMapping(value = "/{email}")
+	public Aluno getAluno(@PathVariable String email) {
+		return alunoService.findAluno(email);
 	}
 
-	@PostMapping(value = "")
+	@PostMapping(value = "/")
 	public void addAluno(@RequestBody Aluno aluno) {
-		if(alunoService.findAluno(aluno.getSlugEmail()) == null)
+		if(alunoService.findAluno(aluno.getEmail()) == null)
 			alunoService.saveAluno(aluno);
 	}
 	
-	@PutMapping(value = "/{slug}")
-	public void updateAluno(@PathVariable String slug, @RequestBody Aluno aluno) {
-		if(slug.equals(aluno.getSlugEmail()))
+	@PutMapping(value = "/{email}")
+	public void updateAluno(@PathVariable String email, @RequestBody Aluno aluno) {
+		if(email.equals(aluno.getEmail()))
 			alunoService.saveAluno(aluno);
 	}
 	
-	@DeleteMapping(value = "/{slug}")
-	public void deleteAluno(@PathVariable String slug) {
-		this.alunoService.deleteAluno(slug);
+	@DeleteMapping(value = "/{email}")
+	public void deleteAluno(@PathVariable String email) {
+		this.alunoService.deleteAluno(email);
 	}
 	
-	@GetMapping(value = "/{slug}/disciplinas")
-	public Set<Disciplina> getDisciplinasFromAluno(@PathVariable String slug) {
-		return this.alunoService
-				.getDisciplinasFromAluno(slug);
+	@GetMapping(value = "/{email}/disciplinas")
+	public Set<Disciplina> getDisciplinasFromAluno(@PathVariable String email) {
+		return this.alunoService.getDisciplinasFromAluno(email);
 	}
 	
-	@PostMapping(value = "/{slug}/disciplinas")
-	public void addDisciplinasToAluno(@PathVariable String slug, @RequestBody DisciplinasList codigosDisciplinas) {
+	@PostMapping(value = "/{email}/disciplinas")
+	public void addDisciplinasToAluno(@PathVariable String email, @RequestBody DisciplinasList codigosDisciplinas) {
 		Set<Disciplina> disciplinas = new HashSet<>();
 		for(String codigoDisciplina : codigosDisciplinas.getCodigos())
 			disciplinas.add(disciplinaService.getDisciplina(codigoDisciplina));
-		this.alunoService.addDisciplinasToAluno(slug, disciplinas);
+		this.alunoService.addDisciplinasToAluno(email, disciplinas);
 	}
 	
 }

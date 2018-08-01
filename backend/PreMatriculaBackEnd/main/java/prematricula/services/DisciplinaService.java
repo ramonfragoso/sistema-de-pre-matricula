@@ -20,8 +20,7 @@ public class DisciplinaService {
 	}
 	
 	public Disciplina getDisciplina(String codigoDisciplina){
-		return this.disciplinaRepository.findById(codigoDisciplina)
-										.orElse(null);
+		return this.disciplinaRepository.findOne(codigoDisciplina);
 	}
 	
 	public void saveDisciplina(Disciplina disciplina){
@@ -29,11 +28,11 @@ public class DisciplinaService {
 	}
 
 	public void deleteDisciplina(String codigo) {
-		this.disciplinaRepository.deleteById(codigo);
+		this.disciplinaRepository.delete(codigo);
 	}
 	
 	public Set<Aluno> findAllAlunoByDisciplina(String codigo){
-		return this.disciplinaRepository.findById(codigo).orElse(new Disciplina()).getAlunos();
+		return this.disciplinaRepository.findOne(codigo).getAlunos();
 	}
 
 	public Set<Aluno> getAlunosFromDisciplina(String codigo) {

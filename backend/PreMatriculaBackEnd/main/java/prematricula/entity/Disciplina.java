@@ -121,49 +121,6 @@ public class Disciplina {
 	public Set<Aluno> getAlunos(){
 		return alunos;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + periodo;
-		result = prime * result + qtdCreditos;
-		result = prime * result + ((tipoDisciplina == null) ? 0 : tipoDisciplina.hashCode());
-		result = prime * result + ((tipoGrade == null) ? 0 : tipoGrade.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Disciplina other = (Disciplina) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (periodo != other.periodo)
-			return false;
-		if (qtdCreditos != other.qtdCreditos)
-			return false;
-		if (tipoDisciplina != other.tipoDisciplina)
-			return false;
-		if (tipoGrade != other.tipoGrade)
-			return false;
-		return true;
-	}
 	
 	
 

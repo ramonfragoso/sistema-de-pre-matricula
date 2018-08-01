@@ -26,33 +26,39 @@ public class AlunoService {
 	}
 	
 	
-	public Set<Disciplina> findAllDisciplinasAluno(String alunoEmail){
-		return this.findAluno(alunoEmail).getDisciplinas();
+	public Set<Disciplina> findAllDisciplinasAluno(String slug){
+		return this.findAluno(slug).getDisciplinas();
 	}
 	
 	
-	public Aluno findAluno(String alunoEmail) {
-		return alunoRepository.findOne(alunoEmail);
+	public Aluno findAluno(String slug) {
+		return alunoRepository
+				.findAll()
+				.stream()
+				.filter(aluno -> aluno.getSlugEmail().equals(slug))
+				.findAny()
+				.orElse(null);
 	}
 	
 	
 	
-	public void deleteAluno(String email) {
-		this.alunoRepository.delete(email);
+	public void deleteAluno(String slug) {
+		Aluno aluno = this.findAluno(slug);
+		this.alunoRepository.delete(aluno);
 	}
 	
-	public boolean isFirstAccess(String alunoEmail) {
-		return this.findAluno(alunoEmail) == null;
+	public boolean isFirstAccess(String slug) {
+		return this.findAluno(slug) == null;
 	}
 
-	public void addDisciplinasToAluno(String email, Set<Disciplina> disciplinas) {
-		Aluno aluno = this.findAluno(email);
+	public void addDisciplinasToAluno(String slug, Set<Disciplina> disciplinas) {
+		Aluno aluno = this.findAluno(slug);
 		aluno.setDisciplinas(disciplinas);
 		this.alunoRepository.save(aluno);
 	}
 
-	public Set<Disciplina> getDisciplinasFromAluno(String email) {
-		return this.findAluno(email).getDisciplinas();
+	public Set<Disciplina> getDisciplinasFromAluno(String slug) {
+		return this.findAluno(slug).getDisciplinas();
 	}
 	
 }

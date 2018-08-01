@@ -28,7 +28,7 @@ import prematricula.util.DisciplinasList;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class Facade {
 
 	@GetMapping("/hello")

@@ -20,10 +20,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import prematricula.enums.GradeAluno;
+import prematricula.enums.GradeDisciplina;
 
 @Entity
 @Table(name = "Aluno")
+@EqualsAndHashCode
 public class Aluno {
 
 	@Id
@@ -42,9 +49,6 @@ public class Aluno {
 	@Enumerated(EnumType.STRING)
 	private GradeAluno grade;
 	
-	@JsonIgnore
-	private String slugEmail;
-	
 	public Aluno() {
 		
 	}
@@ -57,23 +61,13 @@ public class Aluno {
 		disciplinas = new HashSet<>();
 	}
 	
-	private String generateSlug(String email) {
-		String slug = email.split("@")[0];
-		slug = slug.replace('.', '_');
-		return slug;
-	}
-	
-	public String getSlugEmail() {
-		return this.slugEmail;
-	}
-	
 	@Override
 	public String toString() {
 		return this.matricula + ": " + this.nome;
 	}
 
 	public void setGrade(String grade) {
-		if (grade.toLowerCase().equals("nova")) {
+		if (grade.toLowerCase() == "nova") {
 			this.grade = GradeAluno.NOVA;
 		} else {
 			this.grade = GradeAluno.ANTIGA;
@@ -92,7 +86,6 @@ public class Aluno {
 	}
 
 	public void setEmail(String email) {
-		this.slugEmail = this.generateSlug(email);
 		this.email = email;
 	}
 
@@ -123,53 +116,5 @@ public class Aluno {
 	public GradeAluno getGrade() {
 		return grade;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((grade == null) ? 0 : grade.hashCode());
-		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((slugEmail == null) ? 0 : slugEmail.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (grade != other.grade)
-			return false;
-		if (matricula == null) {
-			if (other.matricula != null)
-				return false;
-		} else if (!matricula.equals(other.matricula))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (slugEmail == null) {
-			if (other.slugEmail != null)
-				return false;
-		} else if (!slugEmail.equals(other.slugEmail))
-			return false;
-		return true;
-	}
-	
-	
 
 }
