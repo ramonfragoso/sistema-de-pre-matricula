@@ -9,14 +9,21 @@ export default class VerPreMatriculas extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      alunos: []
+      alunos: [
+        // {
+        //   "nome": "Jog",
+        //   "email": "jj",
+        //   "matricula": "22",
+        //   "disciplinas": ["AA", "BB"]
+        // }
+      ]
     }
   }
   componentWillMount(){
-    var promessas = []
     fetch("https://prematricula-ufcg.herokuapp.com/api/alunos")
     .then(r => r.json())
     .then(r => {
+      let promessas = []
       console.log(r)
       for(let aluno of r){
         let email = aluno.email;
@@ -32,12 +39,20 @@ export default class VerPreMatriculas extends React.Component {
             emailFinal += caractere
           }
         }
-        promessas.push(fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`).then(r => r.json()))
+        promessas.push(fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`)
+        .then(r => r.json())
+        .then(r => {
+          return {
+            ...aluno,
+            "disciplinas": r
+          }
+        }));
       }
+      Promise.all(promessas)
+      .then(r => this.setState({"alunos": r}))
+      // .then(r => console.log(r))
     }
   )
-  Promise.all(promessas)
-  .then(r => console.log(r));
 
 
   }

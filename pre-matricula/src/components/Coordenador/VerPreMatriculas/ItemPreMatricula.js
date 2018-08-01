@@ -15,7 +15,7 @@ export default class ItemPreMatricula extends React.Component {
         <Table.Cell>{this.props.info.matricula}</Table.Cell>
         <Table.Cell singleLine>{this.props.info.nome}</Table.Cell>
         <Table.Cell>{this.props.info.email}</Table.Cell>
-        <Table.Cell>{this.props.info.disciplinas}</Table.Cell>
+        <Table.Cell>{this.props.info.disciplinas.map(r => r.nome).join(', ')}</Table.Cell>
       </Table.Row>
 
     )
