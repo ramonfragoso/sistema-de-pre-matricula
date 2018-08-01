@@ -1,9 +1,19 @@
 import React from 'react';
 import {Item} from 'semantic-ui-react';
 import { Route, Redirect } from 'react-router-dom'
+
+
+
+
 export default class FixedNavbar extends React.Component {
-  state = {
-    redirect: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false
+
+
+    }
+    this.onClick = this.onClick.bind(this)
   }
 
   setRedirect = () => {
@@ -12,20 +22,21 @@ export default class FixedNavbar extends React.Component {
     })
   }
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to='/home'/>
-    }
+  onClick = e => {
+    e.preventDefault();
+    this.setRedirect();
+    console.log("oi");
+    setTimeout(() => {this.props.handleLogout("loggedOff","")}, 50);
+
   }
 
   render() {
     return(
       <div className="ui fixed inverted menu">
-        {this.renderRedirect()}
+        {this.state.redirect ? <Redirect to="/home"/> : <div></div>}
         <p className="header item">Pré-Matrícula</p>
         <a className="item" onClick={this.setRedirect}> <i className="fas fa-home"></i></a>
-        <a className="right item"><i className="fas fa-bell"></i></a>
-        <a className="item" onClick={(e) => this.props.handleLogout("loggedOff", e)}><i className="fas fa-sign-out-alt"></i></a>
+        <a className="right item" onClick={(e) => {this.onClick(e)}}><i className="fas fa-sign-out-alt"></i></a>
       </div>
     )
   }

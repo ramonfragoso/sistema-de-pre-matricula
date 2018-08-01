@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom'
+import {Redirect } from 'react-router-dom'
 import React from 'react';
 import {Card} from 'semantic-ui-react';
 import '../../Aluno/Aluno.css';

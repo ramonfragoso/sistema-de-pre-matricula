@@ -26,10 +26,10 @@ export default class ItemDisciplina extends React.Component {
 
           <Table.Row>
             {this.renderRedirect()}
-            <Table.Cell>{this.props.info[0]}</Table.Cell>
-            <Table.Cell>{this.props.info[1]}</Table.Cell>
-            <Table.Cell>{this.props.info[2]}</Table.Cell>
-            <Table.Cell>{this.props.info[3]}</Table.Cell>
+            <Table.Cell>{this.props.info.codigo}</Table.Cell>
+            <Table.Cell>{this.props.info.nome}</Table.Cell>
+            <Table.Cell>{this.props.info.qtdCreditos}</Table.Cell>
+            <Table.Cell>{this.props.info.periodo}</Table.Cell>
             <Table.Cell><i className="fas fa-clipboard-list"  onClick={this.setRedirect}></i></Table.Cell>
             <Table.Cell><i className="far fa-times-circle"></i></Table.Cell>
           </Table.Row>

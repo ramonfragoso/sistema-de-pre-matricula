@@ -11,7 +11,7 @@ export default class CadastrarDisciplina extends React.Component {
   render() {
     return(
       <div className="topo">
-        <FixedNavbar/>
+        <FixedNavbar handleLogout={this.props.handleLogout}/>
         <Container>
           <Header><h1>Cadastrar Disciplina</h1></Header>
           <Divider/>

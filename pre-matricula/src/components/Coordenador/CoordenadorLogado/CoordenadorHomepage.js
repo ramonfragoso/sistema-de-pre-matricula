@@ -20,7 +20,7 @@ export default class CoordenadorHomepage extends React.Component {
       <Route path="/home" exact render={() => <Coordenador handleLogout={this.props.handleLogout}/>}/>
       <Route path="/cadastro" exact render={() => <CadastrarDisciplina handleLogout={this.props.handleLogout}/>}/>
       <Route path="/editar" exact render={() => <EditarDisciplina handleLogout={this.props.handleLogout}/>}/>
-      <Route path="/editar/:num" exact render={(match) => <EditarDisciplinaCodigo props={match} handleLogout={this.props.handleLogout}/>}/>
+      <Route path="/editar/:num" exact render={(match) => <EditarDisciplinaCodigo match={match} handleLogout={this.props.handleLogout}/>}/>
       <Route path="/prematriculas" exact render={() => <VerPreMatriculas handleLogout={this.props.handleLogout}/>}/>
       </div>
       )

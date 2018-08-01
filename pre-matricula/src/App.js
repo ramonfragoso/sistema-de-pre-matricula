@@ -21,17 +21,23 @@ class App extends Component {
     console.log(oldStorage);
   }
 
-  handleLoginChangeOnclick(newLoginStatus,e){
+  handleLoginChangeOnclick(newLoginStatus,optStatus,e){
     e.preventDefault();
     this.setState({loginStatus: newLoginStatus})
     localStorage.setItem("loginNavegador", newLoginStatus)
     console.log(this.state);
+    localStorage.setItem("emailSessao", optStatus);
+    console.log(localStorage.getItem("emailSessao"))
+
   }
-  handleLoginChange(newLoginStatus){
+  handleLoginChange(newLoginStatus, optStatus){
 
     this.setState({loginStatus: newLoginStatus})
     localStorage.setItem("loginNavegador", newLoginStatus)
+    localStorage.setItem("emailSessao", optStatus);
+
     console.log(this.state);
+    console.log(localStorage.getItem("emailSessao"))
 
   }
 
@@ -39,7 +45,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path="/"  render={() => <Home handleFromParent={this.handleLoginChange} handleLogout={this.handleLoginChangeOnclick} loginState={this.state.loginStatus}/>}/>
+        <Route path="/"  render={() => <Home handleFromParent={this.handleLoginChange} handleLogout={this.handleLoginChange} loginState={this.state.loginStatus}/>}/>
       </div>
     );
   }

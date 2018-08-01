@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect} from 'react-router-dom';
 
-import {Modal, Button, Input, Form} from 'semantic-ui-react';
+import {Modal, Button, Input, Form, Radio} from 'semantic-ui-react';
 
 import '../../Aluno/Aluno.css';
 export default class ListaDisciplinas extends React.Component {
@@ -10,6 +10,10 @@ export default class ListaDisciplinas extends React.Component {
     super(props);
     this.state = {
       matricula: "",
+      nome:"",
+      tipoGrade:"",
+      email: localStorage.getItem("emailSessao"),
+      redirect: false,
       open: true
     }
   }
@@ -18,14 +22,43 @@ export default class ListaDisciplinas extends React.Component {
     this.setState({ closeOnEscape, closeOnDimmerClick, open: true })
   }
 
-  close = () => this.setState({ open: false })
+
+  handleChange = (e,value) => {
+    e.preventDefault();
+    this.setState({...this.state, [value.name]: value.value})
+  }
+
+  onChange = e => {
+    e.preventDefault();
+    this.setState({
+      ...this.state, [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    var jsn = {
+      "email": this.state.email,
+      "matricula": this.state.matricula,
+      "nome": this.state.nome,
+      "grade": this.state.tipoGrade
+    }
+    console.log(jsn)
+    fetch("https://prematricula-ufcg.herokuapp.com/api/alunos",{
+      method: "POST",
+      body: JSON.stringify(jsn),
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json'
+      }
+    }).then(this.setState({redirect: true}))
+  }
 
   render() {
     const { open, closeOnEscape, closeOnDimmerClick } = this.state
 
     return (
       <div>
-      {this.state.matricula == "" ?
         <Modal
           open={open}
           closeOnEscape={closeOnEscape}
@@ -41,13 +74,44 @@ export default class ListaDisciplinas extends React.Component {
           <Form>
           <Form.Field
             control={Input}
+            label='Nome'
+            onChange={this.onChange}
+            value={this.state.nome}
+            name="nome"/>
+          <Form.Field
+            control={Input}
             label='Matrícula'
             onChange={this.onChange}
             value={this.state.matricula}
-            name="creditos"/>
+            name="matricula"/>
+          <Form.Group inline>
+          <label>Grade:</label>
+          <Form.Field>
+            <Radio
+              label='Antiga'
+              name='tipoGrade'
+              value="ANTIGA"
+              checked={this.state.tipoGrade == 'ANTIGA'}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+              <Radio
+                label='Novo'
+                name='tipoGrade'
+                value="NOVA"
+                checked={this.state.tipoGrade == 'NOVA'}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+            </Form.Group>
+
+
+
+
           <Form.Field
             control={Button}
-            onClick={this.close}
+            onClick={this.handleSubmit}
             positive
             labelPosition='right'
             icon='checkmark'
@@ -57,7 +121,7 @@ export default class ListaDisciplinas extends React.Component {
           <br/>
         </Modal.Actions>
         </Modal>
-        : <Redirect to='/home'/>}
+        {this.state.redirect ? <Redirect to="/home"/> :<div></div>}
       </div>
     )
   }

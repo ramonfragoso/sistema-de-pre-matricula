@@ -14,13 +14,14 @@ export default class EditarDisciplinaCodigo extends React.Component {
     super(props)
   }
   render() {
+    console.log(this.props)
     return(
       <div className="topo">
-        <FixedNavbar/>
+        <FixedNavbar handleLogout={this.props.handleLogout}/>
         <Container>
           <Header><h1>Editar Disciplina</h1></Header>
           <Divider/>
-          <FormDisciplinaEditar codigo={this.props.props.match.params.num}/>
+          <FormDisciplinaEditar codigo={this.props.match.match.params.num}/>
         </Container>
       </div>
     )
