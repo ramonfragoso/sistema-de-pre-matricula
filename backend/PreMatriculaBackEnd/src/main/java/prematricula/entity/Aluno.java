@@ -1,7 +1,9 @@
 package prematricula.entity;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,7 +45,7 @@ public class Aluno {
 		inverseJoinColumns = { @JoinColumn(name = "disciplina_id") }
 	)
 	@JsonIgnore
-	private List<Disciplina> disciplinas = new ArrayList<>();
+	private Set<Disciplina> disciplinas = new HashSet<>();
 	@Enumerated(EnumType.STRING)
 	private GradeAluno grade;
 	
@@ -56,7 +58,7 @@ public class Aluno {
 		this.nome = nome;
 		this.matricula = matricula;
 		this.setGrade(grade);
-		disciplinas = new ArrayList<>();
+		disciplinas = new HashSet<>();
 	}
 	
 	@Override
@@ -103,11 +105,11 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public List<Disciplina> getDisciplinas() {
+	public Set<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(List<Disciplina> disciplinas2) {
+	public void setDisciplinas(Set<Disciplina> disciplinas2) {
 		this.disciplinas = disciplinas2;
 	}
 
