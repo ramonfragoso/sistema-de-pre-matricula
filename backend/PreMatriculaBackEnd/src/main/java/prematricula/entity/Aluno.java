@@ -73,9 +73,9 @@ public class Aluno {
 	}
 
 	public void setGrade(String grade) {
-		if (grade.toLowerCase().equals(GradeAluno.GRADE_NOVA)) {
+		if (grade.toUpperCase().equals(GradeAluno.GRADE_NOVA)) {
 			this.grade = GradeAluno.NOVA;
-		} else if(grade.toLowerCase().equals(GradeAluno.GRADE_ANTIGA)){
+		} else if(grade.toUpperCase().equals(GradeAluno.GRADE_ANTIGA)){
 			this.grade = GradeAluno.ANTIGA;
 		}
 	}
