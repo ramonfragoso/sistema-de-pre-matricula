@@ -14,16 +14,16 @@ export default class FormDisciplina extends React.Component {
     this.state = {
         nome:"",
         codigo:"",
-        creditos:"",
-        horas:"",
-        tipo: ""
+        qtdCreditos:"",
+        periodo:"",
+        tipoGrade: ""
 
 
     }
     this.onSubmit = this.onSubmit.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
   }
-  handleChange = (e,value) => {
+handleChange = (e,value) => {
   e.preventDefault();
   this.setState({...this.state, [value.name]: value.value})
 }
@@ -35,41 +35,57 @@ export default class FormDisciplina extends React.Component {
     })
   }
   onSubmit(){
-    let json = {
-      nome: this.state.nome,
-      codigo: this.state.codigo,
-      horas: this.state.horas,
-      creditos: this.state.creditos,
-      tipo: this.state.tipo
-    }
-    console.log(json);
-    this.setState({nome:"",
-    codigo:"",
-    creditos:"",
-    horas:"",
-    tipo: ""})
+    var json = {
+      "nome": this.state.nome,
+      "codigo": this.state.codigo,
+      "periodo": parseInt(this.state.periodo),
+      "qtdCreditos": parseInt(this.state.qtdCreditos),
+      "tipoGrade": this.state.tipoGrade,
+      "coordenadorEmail": "emailtestepsoft@gmail.com"
+    };
+    fetch("https://prematricula-ufcg.herokuapp.com/api/disciplinas",{
+      method: "POST",
+      body: JSON.stringify(json),
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this.setState({"nome": "",
+    "codigo":"",
+    "periodo": "",
+    "qtdCreditos": "",
+    "tipoGrade": "",
+    "tipoDisciplina": ""}))
 
 
   }
 
   onSubmitClick(e){
     e.preventDefault;
-    let json = {
-      nome: this.state.nome,
-      codigo: this.state.codigo,
-      horas: this.state.horas,
-      creditos: this.state.creditos,
-      tipo: this.state.tipo
+    var jso = {
+      "nome": this.state.nome,
+      "codigo": this.state.codigo,
+      "periodo": parseInt(this.state.periodo),
+      "qtdCreditos": parseInt(this.state.qtdCreditos),
+      "tipoGrade": this.state.tipoGrade,
+      "coordenadorEmail": "emailtestepsoft@gmail.com"
     }
-    console.log(json);
-    this.setState({nome:"",
-    codigo:"",
-    creditos:"",
-    horas:"",
-    tipo: ""})
-
-
-  }
+    fetch("https://prematricula-ufcg.herokuapp.com/api/disciplinas",{
+      method: "POST",
+      body: JSON.stringify(jso),
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this.setState({"nome": "",
+    "codigo":"",
+    "periodo": "",
+    "qtdCreditos": "",
+    "tipoGrade": "",
+    "tipoDisciplina": ""}))
+}
 
   render() {
 
@@ -87,9 +103,9 @@ export default class FormDisciplina extends React.Component {
         <Form.Field control={Input} label='Código' value={this.state.codigo} name="codigo" onChange={this.onChange} placeholder='Ex.: 2444356' />
         </Form.Group>
         <br/>
-        <Form.Group>
-        <Form.Field control={Input} label='Número de Créditos' onChange={this.onChange} value={this.state.creditos} name="creditos" placeholder='Ex.: 4' />
-        <Form.Field control={Input} label='Quantidade de Horas' onChange={this.onChange} value={this.state.horas} name="horas" placeholder='Ex.: 60' />
+        <Form.Group widths='equal'>
+        <Form.Field control={Input} label='Número de Créditos' onChange={this.onChange} value={this.state.qtdCreditos} name="qtdCreditos" placeholder='Ex.: 4' />
+        <Form.Field control={Input} label='Período da Disciplina' onChange={this.onChange} value={this.state.periodo} name="periodo" placeholder='Ex.: 5, Obs.: 0 representa indefinido/opcional.' />
         </Form.Group>
         <br/>
         <Form.Group inline>
@@ -97,27 +113,27 @@ export default class FormDisciplina extends React.Component {
         <Form.Field>
             <Radio
               label='Ambas'
-              name='tipo'
-              value="Ambas"
-              checked={this.state.tipo == 'Ambas'}
+              name='tipoGrade'
+              value="AMBAS"
+              checked={this.state.tipoGrade == 'AMBAS'}
               onChange={this.handleChange}
             />
           </Form.Field>
           <Form.Field>
               <Radio
                 label='Novo'
-                name='tipo'
-                value="Novo"
-                checked={this.state.tipo == 'Novo'}
+                name='tipoGrade'
+                value="NOVA"
+                checked={this.state.tipoGrade == 'NOVA'}
                 onChange={this.handleChange}
               />
             </Form.Field>
           <Form.Field>
             <Radio
               label='Antigo'
-              name='tipo'
-              value="Antigo"
-              checked={this.state.tipo == 'Antigo'}
+              name='tipoGrade'
+              value="ANTIGA"
+              checked={this.state.tipoGrade == 'ANTIGA'}
               onChange={this.handleChange}
             />
           </Form.Field>

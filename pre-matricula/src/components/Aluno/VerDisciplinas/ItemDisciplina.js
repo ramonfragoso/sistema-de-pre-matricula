@@ -11,10 +11,10 @@ export default class ItemDisciplina extends React.Component {
     return(
 
           <Table.Row>
-            <Table.Cell>{this.props.info[0]}</Table.Cell>
-            <Table.Cell>{this.props.info[1]}</Table.Cell>
-            <Table.Cell>{this.props.info[2]}</Table.Cell>
-            <Table.Cell>{this.props.info[3]}</Table.Cell>
+            <Table.Cell>{this.props.info.codigo}</Table.Cell>
+            <Table.Cell>{this.props.info.nome}</Table.Cell>
+            <Table.Cell>{this.props.info.qtdCreditos}</Table.Cell>
+            <Table.Cell>{this.props.info.periodo}</Table.Cell>
           </Table.Row>
 
     )

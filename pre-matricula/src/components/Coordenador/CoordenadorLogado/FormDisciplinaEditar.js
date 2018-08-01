@@ -1,7 +1,5 @@
 import React from 'react';
-import {Route, Router} from 'react-router-dom';
 import {Form, Input, Radio, Button} from 'semantic-ui-react';
-import FixedNavbar from '../../FixedNavbar';
 
 import '../../Aluno/Aluno.css';
 
@@ -12,11 +10,12 @@ export default class FormDisciplina extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        nome:"",
-        codigo: this.props.codigo,
-        creditos:"",
-        horas:"",
-        tipo: ""
+      nome:"",
+      codigo:this.props.codigo,
+      qtdCreditos:"",
+      periodo:"",
+      tipoDisciplina: "",
+      tipoGrade: ""
 
 
     }
@@ -35,38 +34,58 @@ export default class FormDisciplina extends React.Component {
     })
   }
   onSubmit(){
-    let json = {
-      nome: this.state.nome,
-      codigo: this.state.codigo,
-      horas: this.state.horas,
-      creditos: this.state.creditos,
-      tipo: this.state.tipo
+    var json = {
+      "nome": this.state.nome,
+      "codigo": this.props.codigo,
+      "periodo": this.state.periodo,
+      "qtdCreditos": this.state.qtdCreditos,
+      "tipoGrade": this.state.tipoGrade,
+      "coordenadorEmail": "emailtestepsoft@gmail.com"
     }
-    console.log(json);
-    this.setState({nome:"",
-    codigo: this.props.codigo,
-    creditos:"",
-    horas:"",
-    tipo: ""})
+    fetch(`https://prematricula-ufcg.herokuapp.com/api/disciplinas/${this.props.codigo}`,{
+      method: "PUT",
+      body: JSON.stringify(json),
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this.setState(
+      {"nome": "",
+    "codigo":this.props.codigo,
+    "periodo": "",
+    "qtdCreditos": "",
+    "tipoGrade": "",
+    "tipoDisciplina": ""}))
+
 
 
   }
 
   onSubmitClick(e){
     e.preventDefault;
-    let json = {
-      nome: this.state.nome,
-      codigo: this.state.codigo,
-      horas: this.state.horas,
-      creditos: this.state.creditos,
-      tipo: this.state.tipo
+    var json = {
+      "nome": this.state.nome,
+      "codigo": this.props.codigo,
+      "periodo": this.state.periodo,
+      "qtdCreditos": this.state.qtdCreditos,
+      "tipoGrade": this.state.tipoGrade,
+      "coordenadorEmail": "emailtestepsoft@gmail.com"
     }
-    console.log(json);
-    this.setState({nome:"",
-    codigo:"",
-    creditos:"",
-    horas:"",
-    tipo: ""})
+    fetch(`https://prematricula-ufcg.herokuapp.com/api/disciplinas/${this.props.codigo}`,{
+      method: "PUT",
+      body: JSON.stringify(json),
+      headers:{
+        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this.setState({"nome": "",
+    "codigo":this.props.codigo,
+    "periodo": "",
+    "qtdCreditos": "",
+    "tipoGrade": "",
+    "tipoDisciplina": ""}))
 
 
   }
@@ -75,56 +94,57 @@ export default class FormDisciplina extends React.Component {
 
 
     return(
-      <Form>
-        <Form.Group widths='equal'>
-        <Form.Field
-        control={Input}
-        label='Nome da Disciplina'
-        placeholder='Ex.: Laboratório de Programação 1'
-        name="nome"
-        value={this.state.nome}
-        onChange={this.onChange}/>
-        <Form.Field control={Input} label='Código' value={this.props.codigo} />
-        </Form.Group>
-        <br/>
-        <Form.Group>
-        <Form.Field control={Input} label='Número de Créditos' onChange={this.onChange} value={this.state.creditos} name="creditos" placeholder='Ex.: 4' />
-        <Form.Field control={Input} label='Quantidade de Horas' onChange={this.onChange} value={this.state.horas} name="horas" placeholder='Ex.: 60' />
-        </Form.Group>
-        <br/>
-        <Form.Group inline>
-        <label>Grade</label>
-        <Form.Field>
-            <Radio
-              label='Ambas'
-              name='tipo'
-              value="Ambas"
-              checked={this.state.tipo == 'Ambas'}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
+        <Form>
+          <Form.Group widths='equal'>
+          <Form.Field
+          control={Input}
+          label='Nome da Disciplina'
+          placeholder='Ex.: Laboratório de Programação 1'
+          name="nome"
+          value={this.state.nome}
+          onChange={this.onChange}/>
+          <Form.Field control={Input} label='Código' value={this.state.codigo} name="codigo" placeholder='Ex.: 2444356' />
+          </Form.Group>
+          <br/>
+          <Form.Group widths='equal'>
+          <Form.Field control={Input} label='Número de Créditos' onChange={this.onChange} value={this.state.qtdCreditos} name="qtdCreditos" placeholder='Ex.: 4' />
+          <Form.Field control={Input} label='Período da Disciplina' onChange={this.onChange} value={this.state.periodo} name="periodo" placeholder='Ex.: 5, Obs.a: 0 representa indefinido.' />
+          </Form.Group>
+          <br/>
+          <Form.Group inline>
+          <label>Grade</label>
           <Form.Field>
               <Radio
-                label='Novo'
-                name='tipo'
-                value="Novo"
-                checked={this.state.tipo == 'Novo'}
+                label='Ambas'
+                name='tipoGrade'
+                value="AMBAS"
+                checked={this.state.tipoGrade === 'AMBAS'}
                 onChange={this.handleChange}
               />
             </Form.Field>
-          <Form.Field>
-            <Radio
-              label='Antigo'
-              name='tipo'
-              value="Antigo"
-              checked={this.state.tipo == 'Antigo'}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-      </Form.Group>
-      <br/>
-      <Form.Field control={Button} color="linkedin" onClick={this.onSubmitClick}>Editar</Form.Field>
-      </Form>
+            <Form.Field>
+                <Radio
+                  label='Novo'
+                  name='tipoGrade'
+                  value="NOVA"
+                  checked={this.state.tipoGrade === 'NOVA'}
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            <Form.Field>
+              <Radio
+                label='Antigo'
+                name='tipoGrade'
+                value="ANTIGA"
+                checked={this.state.tipoGrade === 'ANTIGA'}
+                onChange={this.handleChange}
+              />
+            </Form.Field>
+        </Form.Group>
+        <br/>
+        <Form.Field control={Button} color="linkedin" onClick={this.onSubmitClick}>Editar</Form.Field>
+        </Form>
+
     )
   }
 }

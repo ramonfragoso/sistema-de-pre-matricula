@@ -8,6 +8,53 @@ import '../../Aluno/Aluno.css';
 export default class VerPreMatriculas extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      alunos: [
+        // {
+        //   "nome": "Jog",
+        //   "email": "jj",
+        //   "matricula": "22",
+        //   "disciplinas": ["AA", "BB"]
+        // }
+      ]
+    }
+  }
+  componentWillMount(){
+    fetch("https://prematricula-ufcg.herokuapp.com/api/alunos")
+    .then(r => r.json())
+    .then(r => {
+      let promessas = []
+      console.log(r)
+      for(let aluno of r){
+        let email = aluno.email;
+        let emailFinal = "";
+        for (let caractere of email){
+          if (caractere == "@"){
+            break;
+            }
+          else if (caractere == ".") {
+            emailFinal += "_"
+            }
+          else {
+            emailFinal += caractere
+          }
+        }
+        promessas.push(fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`)
+        .then(r => r.json())
+        .then(r => {
+          return {
+            ...aluno,
+            "disciplinas": r
+          }
+        }));
+      }
+      Promise.all(promessas)
+      .then(r => this.setState({"alunos": r}))
+      // .then(r => console.log(r))
+    }
+  )
+
+
   }
 
   render() {
@@ -21,7 +68,7 @@ export default class VerPreMatriculas extends React.Component {
           </Grid>
           <Divider/>
           <br/>
-          <ListaPreMatriculas/>
+          <ListaPreMatriculas alunos={this.state.alunos}/>
           <br/>
         </Container>
       </div>

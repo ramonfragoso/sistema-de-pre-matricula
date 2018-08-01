@@ -39,15 +39,16 @@ export default class VerDisciplinas extends React.Component {
             <Grid.Column>
               <h3>Listar por</h3>
               <select className="ui dropdown listSelector" placeholder="criterio" id="dropdownEditar" onChange={(e) => this.handleChangeFiltro(e)}>
-                <option value="2">...</option>
-                <option value="1">Nome</option>
+              <option value="2">...</option>
+              <option value="1">Nome</option>
+              <option value="3">Periodo</option>
               </select>
             </Grid.Column>
             <Grid.Column className="dropdownDisciplinas">
               <h3>Período</h3>
               <select className="ui dropdown listSelector" onChange={(e) => this.handleChange(e)}>
                 <option value="11" selected="selected">Todos</option>
-                <option value="10">Optativa</option>
+                <option value="0">Optativa</option>
                 <option value="9">9</option>
                 <option value="8">8</option>
                 <option value="7">7</option>

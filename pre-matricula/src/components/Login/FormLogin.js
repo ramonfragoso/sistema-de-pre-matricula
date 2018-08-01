@@ -15,8 +15,8 @@ export default class FormLogin extends React.Component {
     const responseGoogle = (response) => {
       console.log(response);
       let email = response.w3.U3;
-      if(email.endsWith("ccc.ufcg.edu.br"))this.props.handleChange("Aluno");
-      else this.props.handleChange("Coordenador");
+      if(email.endsWith("ccc.ufcg.edu.br"))this.props.handleChange("Aluno",email);
+      else if(email == "emailtestepsoft@gmail.com") this.props.handleChange("Coordenador",email);
     }
 
     return (

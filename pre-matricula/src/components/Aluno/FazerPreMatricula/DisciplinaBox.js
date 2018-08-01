@@ -27,7 +27,9 @@ export default class DisciplinaBox extends React.Component {
     return(
       <Grid.Row>
         <div className="boxDisciplina" onClick={(e) => {this.props.handleSelect(e, this.props.cIndex, this.props.lIndex)}} style={{backgroundColor: `${this.props.selected ? "#E9573F" : "#00B1E1"}`}}>
-        <div className="content">{this.props.name}
+        <div className="content disciplinasBox"><div className="contentBox">{this.props.name} </div>
+        <div className="contentBox">creditos: {this.props.cred}</div>
+        <div className="contentBox">grade: {this.props.grade}</div>
         </div></div>
       </Grid.Row>
     )

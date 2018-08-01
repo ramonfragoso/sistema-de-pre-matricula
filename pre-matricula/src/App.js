@@ -15,23 +15,28 @@ class App extends Component {
   this.state = {loginStatus: "loggedOff"};
 }
   componentWillMount(){
-    let oldStorage = localStorage.getItem("loginNavegador") || " ";
-    if (oldStorage == " ") this.setState({loginStatus: "loggedOff"})
+    let oldStorage = localStorage.getItem("loginNavegador");
+    if (oldStorage == " " || oldStorage == null) this.setState({loginStatus: "loggedOff"})
     else this.setState({loginStatus: oldStorage})
     console.log(oldStorage);
   }
 
-  handleLoginChangeOnclick(newLoginStatus,e){
+  handleLoginChangeOnclick(newLoginStatus,optStatus,e){
     e.preventDefault();
+    localStorage.setItem("emailSessao", optStatus);
+    console.log(localStorage.getItem("emailSessao"))
     this.setState({loginStatus: newLoginStatus})
     localStorage.setItem("loginNavegador", newLoginStatus)
-    console.log(this.state);
-  }
-  handleLoginChange(newLoginStatus){
+    console.log(optStatus)
 
+  }
+  handleLoginChange(newLoginStatus, optStatus){
+    localStorage.setItem("emailSessao", optStatus);
     this.setState({loginStatus: newLoginStatus})
     localStorage.setItem("loginNavegador", newLoginStatus)
+
     console.log(this.state);
+    console.log(localStorage.getItem("emailSessao"))
 
   }
 
@@ -39,7 +44,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route path="/"  render={() => <Home handleFromParent={this.handleLoginChange} handleLogout={this.handleLoginChangeOnclick} loginState={this.state.loginStatus}/>}/>
+        <Route path="/"  render={() => <Home handleFromParent={this.handleLoginChange} handleLogout={this.handleLoginChange} loginState={this.state.loginStatus}/>}/>
       </div>
     );
   }
