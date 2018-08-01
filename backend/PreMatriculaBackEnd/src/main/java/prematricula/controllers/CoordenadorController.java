@@ -13,14 +13,14 @@ import prematricula.services.CoordenadorService;
 
 @RestController
 @RequestMapping("/api/coordenadores")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class CoordenadorController {
 
 	@Autowired
 	private CoordenadorService coordenadorService;
 	
 	
-	@GetMapping("/coordenadores")
+	@GetMapping("")
 	public List<Coordenador> getCoordenadores(){
 		return this.coordenadorService.findAll();
 	}

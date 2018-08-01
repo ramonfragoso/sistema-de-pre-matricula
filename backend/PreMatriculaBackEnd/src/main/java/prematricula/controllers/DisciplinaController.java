@@ -22,7 +22,7 @@ import prematricula.services.DisciplinaService;
 
 @RestController
 @RequestMapping("/api/disciplinas")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class DisciplinaController {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class DisciplinaController {
 	@Autowired
 	private CoordenadorService coordenadorService;
 	
-	@GetMapping(value = "/")
+	@GetMapping(value = "")
 	public List<Disciplina> getDisciplinas() {
 		return disciplinaService.findAll();
 	}
@@ -48,7 +48,7 @@ public class DisciplinaController {
 	
 	
 
-	@PostMapping(value = "/")
+	@PostMapping(value = "")
 	public void addDisciplina(@RequestBody Map<String, String> json) {
 		
 		/**

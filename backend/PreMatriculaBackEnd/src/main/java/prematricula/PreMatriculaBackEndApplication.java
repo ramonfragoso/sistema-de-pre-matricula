@@ -5,7 +5,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import prematricula.entity.Coordenador;
 import prematricula.entity.Disciplina;
@@ -26,7 +30,7 @@ public class PreMatriculaBackEndApplication {
 
 		@Override
 		public void run(ApplicationArguments args) throws Exception {
-			Coordenador hugo = new Coordenador("hugo.galvao@ccc.ufcg.edu.br");
+			Coordenador hugo = new Coordenador("emailtestepsoft@gmail.com");
 			coordenadorService.saveCoordenador(hugo);
 			
 			Disciplina fmcc = new Disciplina("1411311","FMCC I",1,4,"nova");

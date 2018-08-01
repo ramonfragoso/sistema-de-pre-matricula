@@ -49,6 +49,9 @@ public class Aluno {
 	@Enumerated(EnumType.STRING)
 	private GradeAluno grade;
 	
+	@JsonIgnore
+	private String slugEmail;
+	
 	public Aluno() {
 		
 	}
@@ -59,6 +62,16 @@ public class Aluno {
 		this.matricula = matricula;
 		this.setGrade(grade);
 		disciplinas = new HashSet<>();
+	}
+	
+	private String generateSlug(String email) {
+		String slug = email.split("@")[0];
+		slug = slug.replace('.', '_');
+		return slug;
+	}
+	
+	public String getSlugEmail() {
+		return this.slugEmail;
 	}
 	
 	@Override
@@ -86,6 +99,7 @@ public class Aluno {
 	}
 
 	public void setEmail(String email) {
+		this.slugEmail = this.generateSlug(email);
 		this.email = email;
 	}
 
