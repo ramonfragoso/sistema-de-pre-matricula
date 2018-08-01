@@ -13,11 +13,13 @@ export default class VerPreMatriculas extends React.Component {
     }
   }
   componentWillMount(){
+    var promessas = []
     fetch("https://prematricula-ufcg.herokuapp.com/api/alunos")
     .then(r => r.json())
     .then(r => {
+      console.log(r)
       for(let aluno of r){
-        let email = aluno.email
+        let email = aluno.email;
         let emailFinal = "";
         for (let caractere of email){
           if (caractere == "@"){
@@ -30,25 +32,13 @@ export default class VerPreMatriculas extends React.Component {
             emailFinal += caractere
           }
         }
-
-        fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`)
-        .then(resp => resp.json())
-        .then(resp => {
-          let arr = []
-          for(let disciplina of resp){
-            arr.push(disciplina.codigo)
-          }
-          aluno.disciplinas = arr;
-          setTimeout(() => console.log(aluno), 1000);
-        })
-
-
-
+        promessas.push(fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`).then(r => r.json()))
       }
-      return r;
     }
-    )
-    .then(r => this.setState({alunos: r}))
+  )
+  Promise.all(promessas)
+  .then(r => console.log(r));
+
 
   }
 

@@ -35,6 +35,7 @@ export default class VerDisciplinasBox extends React.Component {
 
   componentWillMount(){
     let email = localStorage.getItem("emailSessao")
+    if(email == null) email = "!!!!!!!!!!!!!!!!!!"
     let emailFinal = "";
     for (let caractere of email){
       if (caractere == "@"){
@@ -75,7 +76,7 @@ export default class VerDisciplinasBox extends React.Component {
       disciplinas: r
     })
     console.log(r)}
-  )})
+  )}).catch(error => console.log(error))
   }
 
   setAllUnselected(e){

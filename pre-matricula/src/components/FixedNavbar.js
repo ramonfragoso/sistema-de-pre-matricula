@@ -26,7 +26,7 @@ export default class FixedNavbar extends React.Component {
     e.preventDefault();
     this.setRedirect();
     console.log("oi");
-    setTimeout(() => {this.props.handleLogout("loggedOff","")}, 50);
+    setTimeout(() => {this.props.handleLogout("loggedOff"," ")}, 50);
 
   }
 

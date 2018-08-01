@@ -16,24 +16,28 @@ export default class Aluno extends React.Component {
     }
   }
 
-componentDidMount(){
+componentWillMount(){
   let email = localStorage.getItem("emailSessao")
-  let emailFinal = ""
-  for (let caractere of email){
-    if (caractere == "@"){
-      break;
+  if(email == null || email == " "){ email = " " }
+  fetch("https://prematricula-ufcg.herokuapp.com/api/alunos")
+  .then(r =>  r.json())
+  .then(r => {
+    let retorno = false;
+    console.log(r)
+    for(let item of r){
+      if(item.email == email){
+        retorno = true;
+        console.log("achou");
       }
-    else if (caractere == ".") {
-      emailFinal += "_"
-      }
-    else {
-      emailFinal += caractere
     }
-  }
-  console.log(emailFinal)
-  fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}`)
-  .then(r => r.json())
-  .catch(error => {this.setState({redirect: true}); console.log("heh")})
+    return retorno
+  }).then(r => {
+    if(!r) {
+      this.setState({redirect: true})
+      }
+    else this.setState({redirect: false})
+    })
+
 }
 render(){
   return(

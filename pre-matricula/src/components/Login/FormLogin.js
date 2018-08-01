@@ -15,12 +15,6 @@ export default class FormLogin extends React.Component {
     const responseGoogle = (response) => {
       console.log(response);
       let email = response.w3.U3;
-      fetch('https://prematricula-ufcg.herokuapp.com/api/alunos/', {
-        method: "GET"
-      })
-      .then(r => r.json())
-      .then(r => console.log(r))
-      .catch(error => console.log)
       if(email.endsWith("ccc.ufcg.edu.br"))this.props.handleChange("Aluno",email);
       else if(email == "emailtestepsoft@gmail.com") this.props.handleChange("Coordenador",email);
     }

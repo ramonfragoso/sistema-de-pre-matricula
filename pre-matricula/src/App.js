@@ -15,26 +15,25 @@ class App extends Component {
   this.state = {loginStatus: "loggedOff"};
 }
   componentWillMount(){
-    let oldStorage = localStorage.getItem("loginNavegador") || " ";
-    if (oldStorage == " ") this.setState({loginStatus: "loggedOff"})
+    let oldStorage = localStorage.getItem("loginNavegador");
+    if (oldStorage == " " || oldStorage == null) this.setState({loginStatus: "loggedOff"})
     else this.setState({loginStatus: oldStorage})
     console.log(oldStorage);
   }
 
   handleLoginChangeOnclick(newLoginStatus,optStatus,e){
     e.preventDefault();
-    this.setState({loginStatus: newLoginStatus})
-    localStorage.setItem("loginNavegador", newLoginStatus)
-    console.log(this.state);
     localStorage.setItem("emailSessao", optStatus);
     console.log(localStorage.getItem("emailSessao"))
+    this.setState({loginStatus: newLoginStatus})
+    localStorage.setItem("loginNavegador", newLoginStatus)
+    console.log(optStatus)
 
   }
   handleLoginChange(newLoginStatus, optStatus){
-
+    localStorage.setItem("emailSessao", optStatus);
     this.setState({loginStatus: newLoginStatus})
     localStorage.setItem("loginNavegador", newLoginStatus)
-    localStorage.setItem("emailSessao", optStatus);
 
     console.log(this.state);
     console.log(localStorage.getItem("emailSessao"))
