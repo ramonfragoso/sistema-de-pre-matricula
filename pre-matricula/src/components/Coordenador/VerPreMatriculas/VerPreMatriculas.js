@@ -2,6 +2,7 @@ import React from 'react';
 import FixedNavbar from '../../FixedNavbar';
 import {Container, Header, Divider, Table, Button, Grid} from 'semantic-ui-react';
 import ListaPreMatriculas from './ListaPreMatriculas';
+import ExportCSV from '../../../modules/exportCSV'
 
 import '../../Aluno/Aluno.css';
 
@@ -10,12 +11,6 @@ export default class VerPreMatriculas extends React.Component {
     super(props);
     this.state = {
       alunos: [
-        // {
-        //   "nome": "Jog",
-        //   "email": "jj",
-        //   "matricula": "22",
-        //   "disciplinas": ["AA", "BB"]
-        // }
       ]
     }
   }
@@ -64,7 +59,7 @@ export default class VerPreMatriculas extends React.Component {
         <Container>
           <Grid columns={2}>
           <Grid.Column><Header><h1>Pré-Matrículas</h1></Header></Grid.Column>
-          <Grid.Column><Button color="linkedin" floated="right">Exportar CSV</Button></Grid.Column>
+          <Grid.Column><Button color="linkedin" floated="right" onClick={() => ExportCSV.exportToCSV(this.state.alunos)}>Exportar CSV</Button></Grid.Column>
           </Grid>
           <Divider/>
           <br/>
