@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,6 +42,7 @@ public class Aluno {
 		joinColumns = { @JoinColumn(name = "aluno_id") }, 
 		inverseJoinColumns = { @JoinColumn(name = "disciplina_id") }
 	)
+	@JsonIgnore
 	private List<Disciplina> disciplinas = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	private GradeAluno grade;
@@ -104,8 +107,8 @@ public class Aluno {
 		return disciplinas;
 	}
 
-	public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
-		this.disciplinas = disciplinas;
+	public void setDisciplinas(List<Disciplina> disciplinas2) {
+		this.disciplinas = disciplinas2;
 	}
 
 	public GradeAluno getGrade() {

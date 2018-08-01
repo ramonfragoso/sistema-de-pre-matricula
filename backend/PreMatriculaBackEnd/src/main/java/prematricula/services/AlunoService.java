@@ -43,5 +43,15 @@ public class AlunoService {
 	public boolean isFirstAccess(String alunoEmail) {
 		return this.findAluno(alunoEmail) == null;
 	}
+
+	public void addDisciplinasToAluno(String email, List<Disciplina> disciplinas) {
+		Aluno aluno = this.findAluno(email);
+		aluno.setDisciplinas(disciplinas);
+		this.alunoRepository.save(aluno);
+	}
+
+	public List<Disciplina> getDisciplinasFromAluno(String email) {
+		return this.findAluno(email).getDisciplinas();
+	}
 	
 }

@@ -22,10 +22,11 @@ import prematricula.entity.Disciplina;
 import prematricula.services.AlunoService;
 import prematricula.services.CoordenadorService;
 import prematricula.services.DisciplinaService;
+import prematricula.util.DisciplinasList;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "+")
+@CrossOrigin(origins = "*")
 public class Facade {
 
 	@Autowired
@@ -43,7 +44,8 @@ public class Facade {
 
 	@PostMapping(value = "/alunos")
 	public void addAluno(@RequestBody Aluno aluno) {
-		alunoService.saveAluno(aluno);
+		if(alunoService.findAluno(aluno.getEmail()) == null)
+			alunoService.saveAluno(aluno);
 	}
 	
 	@PutMapping(value = "/alunos/{email}")
@@ -55,6 +57,19 @@ public class Facade {
 	@DeleteMapping(value = "/alunos/{email}")
 	public void deleteAluno(@PathVariable String email) {
 		this.alunoService.deleteAluno(email);
+	}
+	
+	@GetMapping(value = "/alunos/{email}/disciplinas")
+	public List<Disciplina> getDisciplinasFromAluno(@PathVariable String email) {
+		return this.alunoService.getDisciplinasFromAluno(email);
+	}
+	
+	@PutMapping(value = "/alunos/{email}/disciplinas")
+	public void addDisciplinasToAluno(@PathVariable String email, @RequestBody DisciplinasList codigosDisciplinas) {
+		List<Disciplina> disciplinas = new ArrayList<>();
+		for(String codigoDisciplina : codigosDisciplinas.getCodigos())
+			disciplinas.add(disciplinaService.getDisciplina(codigoDisciplina));
+		this.alunoService.addDisciplinasToAluno(email, disciplinas);
 	}
 	
 	@Autowired
@@ -69,6 +84,8 @@ public class Facade {
 	public Disciplina getDisciplina(@PathVariable String codigo) {
 		return disciplinaService.getDisciplina(codigo);
 	}
+	
+	
 
 	@PostMapping(value = "/disciplinas")
 	public void addDisciplina(@RequestBody Map<String, String> json) {
@@ -86,18 +103,21 @@ public class Facade {
 	"email": "hugo.galvao@ccc.ufcg.edu.br"
 }
 		 */
-		Disciplina disciplina = new Disciplina();
-		disciplina.setCodigo(json.get("codigo"));
-		disciplina.setCodigo(json.get("nome"));
-		disciplina.setPeriodo(Integer.parseInt(json.get("periodo")));
-		disciplina.setQtdCreditos(Integer.parseInt(json.get("qtdCreditos")));
-		disciplina.setGrade(json.get("tipoGrade"));
-		disciplina.setTipoDisciplina(json.get("tipoDisciplina"));
-		
-		String coordenadorEmail = json.get("coordenadorEmail");
-		if(coordenadorService.getCoordenador(coordenadorEmail) != null)
-			disciplinaService.saveDisciplina(disciplina);
+		if(disciplinaService.getDisciplina(json.get("codigo")) == null ) {
+			Disciplina disciplina = new Disciplina();
+			disciplina.setCodigo(json.get("codigo"));
+			disciplina.setNome(json.get("nome"));
+			disciplina.setPeriodo(Integer.parseInt(json.get("periodo")));
+			disciplina.setQtdCreditos(Integer.parseInt(json.get("qtdCreditos")));
+			disciplina.setGrade(json.get("tipoGrade"));
+			disciplina.setTipoDisciplina(json.get("tipoDisciplina"));
+			
+			String coordenadorEmail = json.get("coordenadorEmail");
+			if(coordenadorService.getCoordenador(coordenadorEmail) != null)
+				disciplinaService.saveDisciplina(disciplina);
+		}
 	}
+
 	
 	@PutMapping(value = "/disciplinas/{codigo}")
 	public void updateDisciplina(@PathVariable String codigo, @RequestBody Disciplina disciplina) {
@@ -118,7 +138,7 @@ public class Facade {
 	public List<Coordenador> getCoordenadores(){
 		return this.coordenadorService.findAll();
 	}
-
+	
 
 	@GetMapping("/hello")
 	public String hello() {
