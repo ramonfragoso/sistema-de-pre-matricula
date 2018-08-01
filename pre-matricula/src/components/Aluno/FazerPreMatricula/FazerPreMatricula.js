@@ -3,6 +3,7 @@ import React from 'react';
 import Disciplinas from './Disciplinas';
 import FixedNavbar from '../../FixedNavbar';
 import Footer from './Footer';
+import {Redirect} from "react-router-dom"
 
 import '../Aluno.css';
 
@@ -25,14 +26,17 @@ export default class VerDisciplinasBox extends React.Component {
                         // }
                       ]
                     ],
-      creditos: 0
+      creditos: 0,
+      redirect: false
     }
     this.handleSelect = this.handleSelect.bind(this);
     this.setAllUnselected = this.setAllUnselected.bind(this);
     this.updateCreditos = this.updateCreditos.bind(this);
     this.sendPreMatricula = this.sendPreMatricula.bind(this);
   }
-
+  setRedirect(){
+    this.setState({redirect: true})
+  }
   componentWillMount(){
     let email = localStorage.getItem("emailSessao")
     if(email == null) email = "!!!!!!!!!!!!!!!!!!"
@@ -87,7 +91,7 @@ export default class VerDisciplinasBox extends React.Component {
         disciplina.selected = false;
        }
     }
-    this.setState({disciplinas: disc});
+    this.setState({disciplinas: disc, creditos: 0});
   }
 
 
@@ -138,7 +142,7 @@ export default class VerDisciplinasBox extends React.Component {
         headers:{
           "Content-Type": "application/json"
         }
-      })
+      }).then(this.setRedirect())
 
     }
   }
@@ -146,6 +150,7 @@ export default class VerDisciplinasBox extends React.Component {
   render() {
     return(
       <div className="topopre">
+        {this.state.redirect ? <Redirect to="/home"/> : <div> </div>}
         <FixedNavbar handleClick={this.props.handleClick} handleLogout={this.props.handleLogout}/>
         <Disciplinas handleSelect={this.handleSelect} disciplinas={this.state.disciplinas}/>
         <Footer numCreditos={this.state.creditos} unselectAll={this.setAllUnselected} sendPreMatricula={this.sendPreMatricula}/>
