@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import prematricula.entity.Aluno;
+import prematricula.entity.Coordenador;
 import prematricula.entity.Disciplina;
+import prematricula.facade.OrdenarServiceFacade;
 import prematricula.services.CoordenadorService;
 import prematricula.services.DisciplinaService;
 
@@ -27,55 +29,39 @@ import prematricula.services.DisciplinaService;
 public class DisciplinaController {
 
 	@Autowired
-	private DisciplinaService disciplinaService;
-	
-	@Autowired
-	private CoordenadorService coordenadorService;
+	OrdenarServiceFacade ordenarServiceFacade;
 	
 	@GetMapping(value = "")
 	public List<Disciplina> getDisciplinas() {
-		return disciplinaService.findAll();
+		return this.ordenarServiceFacade.findAllDisciplinas();
 	}
 	
 	@GetMapping(value = "/{codigo}")
 	public Disciplina getDisciplina(@PathVariable String codigo) {
-		return disciplinaService.getDisciplina(codigo);
+		return this.ordenarServiceFacade.findDisciplina(codigo);
 	}
 	
 	@GetMapping(value = "/{codigo}/alunos")
 	public Set<Aluno> getAlunosFromDisciplina(@PathVariable String codigo){
-		return this.disciplinaService.getAlunosFromDisciplina(codigo);
+		return this.ordenarServiceFacade.findAllAlunoOfDisciplina(codigo);
 	}
-	
-	
 
 	@PostMapping(value = "")
 	public void addDisciplina(@RequestBody Map<String, String> json) {
-		
-		/**
-		 {
-	"disciplina":{
-		"codigo": "col",
-		"nome": "xd changed",
-		"periodo": 3,
-		"qtdCreditos": 2,
-		"tipoGrade": "ANTIGA",
-		"tipoDisciplina":"OBRIGATORIA"
-	},
-	"email": "hugo.galvao@ccc.ufcg.edu.br"
-}
-		 */
-		if(disciplinaService.getDisciplina(json.get("codigo")) == null ) {
-			Disciplina disciplina = new Disciplina();
-			disciplina.setCodigo(json.get("codigo"));
-			disciplina.setNome(json.get("nome"));
-			disciplina.setPeriodo(Integer.parseInt(json.get("periodo")));
-			disciplina.setQtdCreditos(Integer.parseInt(json.get("qtdCreditos")));
-			disciplina.setGrade(json.get("tipoGrade"));
+		String codigoDisciplina = json.get("codigo");
+		Disciplina disciplina = this.ordenarServiceFacade.findDisciplina(codigoDisciplina);
+		if(disciplina == null ) {
+			Disciplina nDisciplina = new Disciplina();
+			nDisciplina.setCodigo(json.get("codigo"));
+			nDisciplina.setNome(json.get("nome"));
+			nDisciplina.setPeriodo(Integer.parseInt(json.get("periodo")));
+			nDisciplina.setQtdCreditos(Integer.parseInt(json.get("qtdCreditos")));
+			nDisciplina.setGrade(json.get("tipoGrade"));
 			
 			String coordenadorEmail = json.get("coordenadorEmail");
-			if(coordenadorService.getCoordenador(coordenadorEmail) != null)
-				disciplinaService.saveDisciplina(disciplina);
+			Coordenador coordenador = this.ordenarServiceFacade.getCoordenador(coordenadorEmail);
+			if(coordenador != null)
+				this.ordenarServiceFacade.saveDisciplina(disciplina);
 		}
 	}
 
@@ -83,12 +69,12 @@ public class DisciplinaController {
 	@PutMapping(value = "/{codigo}")
 	public void updateDisciplina(@PathVariable String codigo, @RequestBody Disciplina disciplina) {
 		if(codigo.equals(disciplina.getCodigo()))
-			this.disciplinaService.saveDisciplina(disciplina);
+			this.ordenarServiceFacade.saveDisciplina(disciplina);
 	}
 	
 	@DeleteMapping(value = "/{codigo}")
 	public void deleteDisciplina(@PathVariable String codigo) {
-		this.disciplinaService.deleteDisciplina(codigo);
+		this.ordenarServiceFacade.deleteDisciplina(codigo);
 	}
 	
 }
