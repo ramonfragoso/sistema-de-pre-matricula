@@ -73,18 +73,11 @@ public class Aluno {
 	}
 
 	public void setGrade(String grade) {
-		if (grade.toLowerCase().equals("nova")) {
+		if (grade.toLowerCase().equals(GradeAluno.GRADE_NOVA)) {
 			this.grade = GradeAluno.NOVA;
-		} else {
+		} else if(grade.toLowerCase().equals(GradeAluno.GRADE_ANTIGA)){
 			this.grade = GradeAluno.ANTIGA;
 		}
-	}
-	
-	public boolean hasDisciplina(String codigoDisciplina) {
-		return this.disciplinas
-					.stream()
-					.filter(disciplina -> disciplina.getCodigo().equals(codigoDisciplina))
-					.count() > 0;
 	}
 	
 	public String getEmail() {

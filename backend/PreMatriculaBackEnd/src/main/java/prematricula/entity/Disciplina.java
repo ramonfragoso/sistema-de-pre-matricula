@@ -27,6 +27,8 @@ import prematricula.enums.TipoDisciplina;
 @Table(name = "Disciplina")
 @EqualsAndHashCode
 public class Disciplina {
+	
+	private final int periodoOptativa = 0;
 
 	@Id
 	private String codigo;
@@ -56,18 +58,17 @@ public class Disciplina {
 	}
 
 	public void setGrade(String tipoGrade) {
-		if (tipoGrade.toLowerCase().equals("nova")) {
+		if (tipoGrade.toLowerCase().equals(GradeDisciplina.GRADE_NOVA)) {
 			this.tipoGrade = GradeDisciplina.NOVA;
-		} else if (tipoGrade.toLowerCase().equals("ambas")) {
+		} else if (tipoGrade.toLowerCase().equals(GradeDisciplina.AMBAS_GRADES)) {
 			this.tipoGrade = GradeDisciplina.AMBAS;
-		} else {
+		} else if (tipoGrade.toLowerCase().equals(GradeDisciplina.ANTIGA)) {
 			this.tipoGrade = GradeDisciplina.ANTIGA;
 		}
 	}
 
 	public void setTipoDisciplina(int periodo) {
-		int optativa = 0;
-		if (periodo == optativa) {
+		if (periodo == this.periodoOptativa) {
 			this.tipoDisciplina = TipoDisciplina.OPTATIVA;
 		} else {
 			this.tipoDisciplina = TipoDisciplina.OBRIGATORIA;
