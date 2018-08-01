@@ -2,6 +2,7 @@ package prematricula.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class AlunoService {
 	}
 	
 	
-	public List<Disciplina> findAllDisciplinasAluno(String alunoEmail){
+	public Set<Disciplina> findAllDisciplinasAluno(String alunoEmail){
 		return this.findAluno(alunoEmail).getDisciplinas();
 	}
 	
@@ -44,13 +45,13 @@ public class AlunoService {
 		return this.findAluno(alunoEmail) == null;
 	}
 
-	public void addDisciplinasToAluno(String email, List<Disciplina> disciplinas) {
+	public void addDisciplinasToAluno(String email, Set<Disciplina> disciplinas) {
 		Aluno aluno = this.findAluno(email);
 		aluno.setDisciplinas(disciplinas);
 		this.alunoRepository.save(aluno);
 	}
 
-	public List<Disciplina> getDisciplinasFromAluno(String email) {
+	public Set<Disciplina> getDisciplinasFromAluno(String email) {
 		return this.findAluno(email).getDisciplinas();
 	}
 	

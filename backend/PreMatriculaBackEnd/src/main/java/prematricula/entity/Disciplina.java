@@ -1,7 +1,9 @@
 package prematricula.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -34,7 +38,8 @@ public class Disciplina {
 	@Enumerated(EnumType.STRING)
 	private TipoDisciplina tipoDisciplina;
 	@ManyToMany(mappedBy = "disciplinas")
-	private List<Aluno> alunos = new ArrayList<>();
+	@JsonIgnore
+	private Set<Aluno> alunos;
 	
 	public Disciplina() {
 		
@@ -47,6 +52,7 @@ public class Disciplina {
 		this.qtdCreditos = qtdCreditos;
 		setGrade(tipoGrade);
 		setTipoDisciplina(periodo);
+		this.alunos = new HashSet<>();
 	}
 
 	public void setGrade(String tipoGrade) {
@@ -112,7 +118,7 @@ public class Disciplina {
 		return tipoGrade;
 	}
 	
-	public List<Aluno> getAlunos(){
+	public Set<Aluno> getAlunos(){
 		return alunos;
 	}
 	

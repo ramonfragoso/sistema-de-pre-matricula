@@ -1,6 +1,7 @@
 package prematricula.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,12 @@ public class DisciplinaService {
 		this.disciplinaRepository.delete(codigo);
 	}
 	
-	public List<Aluno> findAllAlunoByDisciplina(String codigo){
+	public Set<Aluno> findAllAlunoByDisciplina(String codigo){
 		return this.disciplinaRepository.findOne(codigo).getAlunos();
+	}
+
+	public Set<Aluno> getAlunosFromDisciplina(String codigo) {
+		return this.getDisciplina(codigo).getAlunos();
 	}
 
 }
