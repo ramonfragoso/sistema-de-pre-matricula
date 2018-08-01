@@ -51,7 +51,7 @@ export default class ListaDisciplinas extends React.Component {
         "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json'
       }
-    }).then(this.setState({redirect: true}))
+    }).then(setTimeout(() => this.setState({redirect: true}),200))
   }
 
   render() {

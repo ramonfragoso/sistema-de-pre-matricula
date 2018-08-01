@@ -34,6 +34,24 @@ export default class VerDisciplinasBox extends React.Component {
   }
 
   componentWillMount(){
+    let email = localStorage.getItem("emailSessao")
+    let emailFinal = "";
+    for (let caractere of email){
+      if (caractere == "@"){
+        break;
+        }
+      else if (caractere == ".") {
+        emailFinal += "_"
+        }
+      else {
+        emailFinal += caractere
+      }
+    }
+    fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}`)
+    .then(r => r.json())
+    .then(r => r.grade)
+    .then( j =>{
+      console.log(j)
     fetch("https://prematricula-ufcg.herokuapp.com/api/disciplinas",{
       method: "GET"
     })
@@ -44,9 +62,12 @@ export default class VerDisciplinasBox extends React.Component {
       for(let disciplina of r){
         disciplina.selected = false;
         if(disciplina.periodo != 0){
-          newDisc[disciplina.periodo-1].push(disciplina);
+          if(disciplina.tipoGrade == j || disciplina.tipoGrade == "AMBAS"){
+          newDisc[disciplina.periodo-1].push(disciplina);}
         }
-        else newDisc[9].push(disciplina);
+        else {
+          if(disciplina.tipoGrade == j || disciplina.tipoGrade == "AMBAS") newDisc[9].push(disciplina);
+        }
       }
       return newDisc
     })
@@ -54,7 +75,7 @@ export default class VerDisciplinasBox extends React.Component {
       disciplinas: r
     })
     console.log(r)}
-    )
+  )})
   }
 
   setAllUnselected(e){
@@ -67,6 +88,7 @@ export default class VerDisciplinasBox extends React.Component {
     }
     this.setState({disciplinas: disc});
   }
+
 
   handleSelect(e,c,l){
     let disc = this.state.disciplinas;
@@ -91,7 +113,27 @@ export default class VerDisciplinasBox extends React.Component {
           if(disciplina.selected) enviadas.push(disciplina.codigo);
          }
       }
-      console.log(enviadas);
+      let email = localStorage.getItem("emailSessao")
+      let emailFinal = "";
+      for (let caractere of email){
+        if (caractere == "@"){
+          break;
+          }
+        else if (caractere == ".") {
+          emailFinal += "_"
+          }
+        else {
+          emailFinal += caractere
+        }
+      }
+      let corpo = {
+        codigos: enviadas
+      }
+      fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`,{
+        method: "POST",
+        body: JSON.stringify(corpo)
+      })
+
     }
   }
 

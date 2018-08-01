@@ -4,6 +4,7 @@ import {Table} from 'semantic-ui-react';
 
 import '../../Aluno/Aluno.css';
 const DESORDENADO = 2;
+const ORDENADO_PERIODO = 3;
 
 export default class ListaDisciplinas extends React.Component {
   constructor(props) {
@@ -34,6 +35,17 @@ export default class ListaDisciplinas extends React.Component {
     .map((a) => <ItemDisciplinaEditar info={a} link={a.codigo}/>)
   }
 
+  getOrdenadoPeriodo = function(){
+    return this.state.disciplinas
+    .sort(function(a,b){
+                          if(a.periodo > b.periodo) return 1;
+                          if(a.periodo < b.periodo) return -1;
+                          return 0;
+                  })
+    .filter((a) => a.periodo == this.props.periodo || this.props.periodo == 11)
+    .map((a) => <ItemDisciplinaEditar info={a} link={a.codigo}/>)
+  }
+
 
   render() {
 
@@ -55,7 +67,7 @@ export default class ListaDisciplinas extends React.Component {
         this.state.disciplinas
           .filter((a) => a.periodo == this.props.periodo || this.props.periodo == 11)
           .map((a) => <ItemDisciplinaEditar info={a} link={a.codigo}/>)
-    : this.getOrdenadoNome()}
+    : (this.props.filtro == ORDENADO_PERIODO ?  this.getOrdenadoPeriodo() : this.getOrdenadoNome())}
           </Table.Body>
         </Table>
       </div>

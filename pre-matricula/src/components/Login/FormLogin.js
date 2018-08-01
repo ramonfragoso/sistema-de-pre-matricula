@@ -22,7 +22,7 @@ export default class FormLogin extends React.Component {
       .then(r => console.log(r))
       .catch(error => console.log)
       if(email.endsWith("ccc.ufcg.edu.br"))this.props.handleChange("Aluno",email);
-      else this.props.handleChange("Coordenador",email);
+      else if(email == "emailtestepsoft@gmail.com") this.props.handleChange("Coordenador",email);
     }
 
     return (

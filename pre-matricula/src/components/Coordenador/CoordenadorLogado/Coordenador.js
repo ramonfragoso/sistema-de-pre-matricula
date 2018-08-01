@@ -16,7 +16,7 @@ render(){
           <Grid>
             <Grid.Row className="logadoText">
               <Header>
-                Seja bem vindo Coordenador, aqui você pode escolher entre fazer sua matrícula ou ver as disciplinas disponíveis. No topo da página pode ver se há notificações ou sair da página.
+                Seja bem vindo Coordenador, aqui você pode escolher entre ver dados de pre matriculas, cadastrar uma nova disciplina ou editar uma disciplina já cadastrada.
               </Header>
             </Grid.Row>
             <Grid.Row columns={3}>

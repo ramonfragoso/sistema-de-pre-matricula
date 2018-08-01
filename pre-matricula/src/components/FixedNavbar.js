@@ -30,6 +30,7 @@ export default class FixedNavbar extends React.Component {
 
   }
 
+
   render() {
     return(
       <div className="ui fixed inverted menu">
