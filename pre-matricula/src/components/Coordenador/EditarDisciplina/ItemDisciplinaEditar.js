@@ -1,5 +1,5 @@
 import React from 'react';
-import {Item, Grid, Table} from 'semantic-ui-react';
+import {Item, Grid, Table, Icon} from 'semantic-ui-react';
 import { Route, Redirect } from 'react-router-dom'
 import '../../Aluno/Aluno.css';
 
@@ -7,9 +7,8 @@ export default class ItemDisciplina extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        redirect: false
-
-
+        redirect: false,
+        deleted: false
     }
     this.handleDelete = this.handleDelete.bind(this)
   }
@@ -21,10 +20,19 @@ export default class ItemDisciplina extends React.Component {
 
     handleDelete(e){
       e.preventDefault();
+
       fetch(`https://prematricula-ufcg.herokuapp.com/api/disciplinas/${this.props.link}`,{
         method: "DELETE"
       }
-    ).catch(error => console.log(error))
+    ).catch(error => console.log(error)).then(
+            this.setState({deleted: true}))
+    }
+
+    renderDelete = () => {
+      let link = '/home/'
+      if (this.state.deleted) {
+        return <Redirect to={link}/>
+      }
     }
 
     renderRedirect = () => {
@@ -39,12 +47,13 @@ export default class ItemDisciplina extends React.Component {
 
           <Table.Row>
             {this.renderRedirect()}
+            {this.renderDelete()}
             <Table.Cell>{this.props.info.codigo}</Table.Cell>
             <Table.Cell>{this.props.info.nome}</Table.Cell>
             <Table.Cell>{this.props.info.qtdCreditos}</Table.Cell>
             <Table.Cell>{this.props.info.periodo}</Table.Cell>
-            <Table.Cell><i className="fas fa-clipboard-list"  onClick={this.setRedirect}></i></Table.Cell>
-            <Table.Cell><i className="far fa-times-circle" onClick={(e) => {this.handleDelete(e)}}></i></Table.Cell>
+            <Table.Cell><Icon floated="center" className="fas fa-clipboard-list"  onClick={this.setRedirect}></Icon></Table.Cell>
+            <Table.Cell><Icon className="far fa-times-circle" onClick={(e) => {this.handleDelete(e)}}></Icon></Table.Cell>
           </Table.Row>
 
     )
