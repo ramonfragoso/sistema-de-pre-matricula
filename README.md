@@ -20,4 +20,3 @@ Neste projeto foram usadas as tecnologias:
 - Estilo: Semantic-UI
 - Backend: SpringBoot
 - Persistência(BD): JPA com MySQL
-
