@@ -20,3 +20,18 @@ Neste projeto foram usadas as tecnologias:
 - Estilo: Semantic-UI
 - Backend: SpringBoot
 - Persistência(BD): JPA com MySQL
+
+### Como rodar localmente
+
+```
+git clone https://github.com/ramonfragoso/sistema-de-pre-matricula.git
+```
+```
+cd sistema-de-pre-matricula/pre-matricula
+``````
+```
+npm update
+``````
+```
+npm start
+``````
