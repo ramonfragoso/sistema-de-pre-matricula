@@ -56,14 +56,29 @@ export default class ListaDisciplinas extends React.Component {
         emailFinal += caractere
       }
       }
-    fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}`,{
-      method: "PUT",
-      body: JSON.stringify(jsn),
-      headers:{
-        "Access-Control-Allow-Origin": "*",
-        'Content-Type': 'application/json'
-      }
-    }).then(setTimeout(() => this.setState({redirect: true}),200))
+    fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`)
+    .then(r => r.json())
+    .then(r => {
+      fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}`,{
+        method: "PUT",
+        body: JSON.stringify(jsn),
+        headers:{
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json'
+        }
+      }).then(() => {
+        let disciplinas = r.map(disc => disc.codigo);
+        fetch(`https://prematricula-ufcg.herokuapp.com/api/alunos/${emailFinal}/disciplinas`, {
+          method: "POST",
+          body: JSON.stringify({
+            codigos: disciplinas
+          }),
+          headers:{
+            "Content-Type": "application/json"
+          }
+        }).then(setTimeout(() => this.setState({redirect: true}),200))
+      })
+    });
   }
 
   render() {

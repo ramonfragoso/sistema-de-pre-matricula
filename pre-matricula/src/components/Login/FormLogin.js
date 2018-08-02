@@ -15,8 +15,8 @@ export default class FormLogin extends React.Component {
     const responseGoogle = (response) => {
       console.log(response);
       let email = response.w3.U3;
-      if(email.endsWith("ccc.ufcg.edu.br"))this.props.handleChange("Aluno",email);
-      else if(email == "emailtestepsoft@gmail.com") this.props.handleChange("Coordenador",email);
+      if(email == "projsw@ccc.ufcg.edu.br" || email == "emailtestepsoft@gmail.com") this.props.handleChange("Coordenador",email);
+      else if(email.endsWith("ccc.ufcg.edu.br") && email !== "projsw@ccc.ufcg.edu.br")this.props.handleChange("Aluno",email);
     }
 
     return (
@@ -24,6 +24,7 @@ export default class FormLogin extends React.Component {
         <p/>
         <GoogleLogin
           clientId="707694176740-0gjiop7raf5h6n48ujtb0ldpp23tf0dr.apps.googleusercontent.com"
+          // clientId="707694176740-0gjiop7raf5h6n48ujtb0ldpp23tf0dr.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={responseGoogle}
           onFailure={responseGoogleFail}

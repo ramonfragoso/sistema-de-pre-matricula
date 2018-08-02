@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, Input, Radio, Button} from 'semantic-ui-react';
+import {Redirect} from 'react-router';
 
 import '../../Aluno/Aluno.css';
 
@@ -15,9 +16,8 @@ export default class FormDisciplina extends React.Component {
       qtdCreditos:"",
       periodo:"",
       tipoDisciplina: "",
-      tipoGrade: ""
-
-
+      tipoGrade: "",
+      redirect: false
     }
     this.onSubmit = this.onSubmit.bind(this);
     this.onSubmitClick = this.onSubmitClick.bind(this);
@@ -56,7 +56,9 @@ export default class FormDisciplina extends React.Component {
     "periodo": "",
     "qtdCreditos": "",
     "tipoGrade": "",
-    "tipoDisciplina": ""}))
+    "tipoDisciplina": "",
+    redirect: true
+    }))
 
 
 
@@ -85,7 +87,9 @@ export default class FormDisciplina extends React.Component {
     "periodo": "",
     "qtdCreditos": "",
     "tipoGrade": "",
-    "tipoDisciplina": ""}))
+    "tipoDisciplina": "",
+    redirect: true
+  }))
 
 
   }
@@ -95,6 +99,7 @@ export default class FormDisciplina extends React.Component {
 
     return(
         <Form>
+          {this.state.redirect ? <Redirect to="/home"/> : <div></div>}
           <Form.Group widths='equal'>
           <Form.Field
           control={Input}

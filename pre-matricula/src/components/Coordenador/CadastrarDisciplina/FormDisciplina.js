@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Router} from 'react-router';
+import {Route, Router, Redirect} from 'react-router';
 import {Form, Input, Radio, Button} from 'semantic-ui-react';
 import FixedNavbar from '../../FixedNavbar';
 
@@ -16,8 +16,8 @@ export default class FormDisciplina extends React.Component {
         codigo:"",
         qtdCreditos:"",
         periodo:"",
-        tipoGrade: ""
-
+        tipoGrade: "",
+        redirect: false
 
     }
     this.onSubmit = this.onSubmit.bind(this);
@@ -56,7 +56,9 @@ handleChange = (e,value) => {
     "periodo": "",
     "qtdCreditos": "",
     "tipoGrade": "",
-    "tipoDisciplina": ""}))
+    "tipoDisciplina": "",
+    redirect: true})
+  )
 
 
   }
@@ -84,7 +86,9 @@ handleChange = (e,value) => {
     "periodo": "",
     "qtdCreditos": "",
     "tipoGrade": "",
-    "tipoDisciplina": ""}))
+    "tipoDisciplina": "",
+    redirect: true})
+  )
 }
 
   render() {
@@ -92,6 +96,7 @@ handleChange = (e,value) => {
 
     return(
       <Form>
+        {this.state.redirect ? <Redirect to="/home"/> : <div></div>}
         <Form.Group widths='equal'>
         <Form.Field
         control={Input}
