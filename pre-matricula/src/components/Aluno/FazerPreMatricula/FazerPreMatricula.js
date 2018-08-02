@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import Disciplinas from './Disciplinas';
 import FixedNavbar from '../../FixedNavbar';
 import Footer from './Footer';
@@ -91,7 +91,9 @@ export default class VerDisciplinasBox extends React.Component {
         disciplina.selected = false;
        }
     }
+
     this.setState({disciplinas: disc, creditos: 0});
+
   }
 
 
@@ -142,7 +144,8 @@ export default class VerDisciplinasBox extends React.Component {
         headers:{
           "Content-Type": "application/json"
         }
-      }).then(this.setRedirect())
+
+      }).then(this.setRedirect();
 
     }
   }
@@ -153,6 +156,7 @@ export default class VerDisciplinasBox extends React.Component {
         {this.state.redirect ? <Redirect to="/home"/> : <div> </div>}
         <FixedNavbar handleClick={this.props.handleClick} handleLogout={this.props.handleLogout}/>
         <Disciplinas handleSelect={this.handleSelect} disciplinas={this.state.disciplinas}/>
+        {this.state.redirect ? <Redirect to="/"/> : <div></div>}
         <Footer numCreditos={this.state.creditos} unselectAll={this.setAllUnselected} sendPreMatricula={this.sendPreMatricula}/>
       </div>
     )
