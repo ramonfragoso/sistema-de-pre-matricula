@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 import Disciplinas from './Disciplinas';
 import FixedNavbar from '../../FixedNavbar';
 import Footer from './Footer';
-import {Redirect} from "react-router-dom"
 
 import '../Aluno.css';
 
@@ -145,7 +144,7 @@ export default class VerDisciplinasBox extends React.Component {
           "Content-Type": "application/json"
         }
 
-      }).then(this.setRedirect();
+      }).then(this.setRedirect());
 
     }
   }
